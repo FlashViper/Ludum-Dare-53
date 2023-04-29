@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjuluvlfu14eg"]
+
+[ext_resource type="Script" path="res://yarn.gd" id="1_rai4p"]
+[ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="2_finan"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jt1bt"]
+radius = 86.0233
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bywme"]
+radius = 38.0132
+
+[node name="Yarn" type="CharacterBody2D"]
+position = Vector2(333, 421)
+script = ExtResource("1_rai4p")
+
+[node name="Visual" type="Sprite2D" parent="."]
+modulate = Color(1, 0.360784, 0.360784, 1)
+rotation = 0.785398
+scale = Vector2(1, 1)
+texture = ExtResource("2_finan")
+
+[node name="PlayerDribble" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDribble"]
+shape = SubResource("CircleShape2D_jt1bt")
+debug_color = Color(0.996078, 0, 0.192157, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bywme")

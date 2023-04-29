@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://du32u483dflsv"]
+
+[ext_resource type="Theme" uid="uid://pkwo8w50eu64" path="res://gui/theme_default.tres" id="1_wmba0"]
+[ext_resource type="Script" path="res://gui/title/title_screen.gd" id="2_5fnih"]
+[ext_resource type="Script" path="res://gui/menu.gd" id="3_bg57p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nkih8"]
+font_size = 150
+
+[sub_resource type="LabelSettings" id="LabelSettings_bxjl7"]
+font_size = 70
+
+[node name="TitleScreen" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wmba0")
+script = ExtResource("2_5fnih")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Logo (temp)" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Kittens (R): 
+Tactical Warfare"
+label_settings = SubResource("LabelSettings_nkih8")
+autowrap_mode = 3
+
+[node name="Menu" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+script = ExtResource("3_bg57p")
+
+[node name="Play" type="Label" parent="VBoxContainer/Menu"]
+layout_mode = 2
+mouse_filter = 0
+text = "Play"
+label_settings = SubResource("LabelSettings_bxjl7")
+
+[node name="Options" type="Label" parent="VBoxContainer/Menu"]
+layout_mode = 2
+mouse_filter = 0
+text = "Options"
+label_settings = SubResource("LabelSettings_bxjl7")
+
+[node name="About" type="Label" parent="VBoxContainer/Menu"]
+layout_mode = 2
+mouse_filter = 0
+text = "About"
+label_settings = SubResource("LabelSettings_bxjl7")
+
+[node name="Quit" type="Label" parent="VBoxContainer/Menu"]
+layout_mode = 2
+mouse_filter = 0
+text = "Quit"
+label_settings = SubResource("LabelSettings_bxjl7")

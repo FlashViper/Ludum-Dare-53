@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://b6nbc7iginl1p"]
+
+[ext_resource type="Script" path="res://player/player_node.gd" id="1_4h23a"]
+[ext_resource type="Script" path="res://player/player_state_machine.gd" id="2_yfoyd"]
+[ext_resource type="Script" path="res://player/states/movement.gd" id="3_gfbnw"]
+[ext_resource type="Script" path="res://player/states/launch.gd" id="3_j5cb2"]
+[ext_resource type="Script" path="res://player/glide.gd" id="3_na682"]
+[ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="4_lgbo2"]
+
+[sub_resource type="Curve" id="Curve_87u1w"]
+_data = [Vector2(0, 0), 0.0, 3.50369, 0, 0, Vector2(0.666667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.608108), -0.191268, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0b237"]
+radius = 60.075
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4h23a")
+
+[node name="States" type="Node" parent="."]
+script = ExtResource("2_yfoyd")
+
+[node name="Launch" type="Node" parent="States"]
+script = ExtResource("3_j5cb2")
+launch_modifier = SubResource("Curve_87u1w")
+
+[node name="Glide" type="Node" parent="States"]
+script = ExtResource("3_na682")
+
+[node name="Movement" type="Node" parent="States"]
+script = ExtResource("3_gfbnw")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="Visual"]
+texture = ExtResource("4_lgbo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0b237")
+debug_color = Color(0.784314, 0.435294, 0, 0.419608)

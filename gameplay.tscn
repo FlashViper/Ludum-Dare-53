@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhp0gddlowe56"]
+
+[ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="1_f5r8l"]
+[ext_resource type="Script" path="res://gameplay.gd" id="1_xxerv"]
+[ext_resource type="Script" path="res://castle.gd" id="2_k15in"]
+[ext_resource type="PackedScene" uid="uid://b6nbc7iginl1p" path="res://player/player.tscn" id="2_tkvys"]
+[ext_resource type="Script" path="res://camera_rig.gd" id="4_mj44r"]
+[ext_resource type="PackedScene" uid="uid://bjuluvlfu14eg" path="res://yarn.tscn" id="5_dyes2"]
+[ext_resource type="Script" path="res://yarn_spawner.gd" id="6_m2h2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rm36"]
+size = Vector2(326, 289.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fcb8d"]
+font_size = 64
+
+[node name="Gameplay" type="Node"]
+script = ExtResource("1_xxerv")
+
+[node name="Castle" type="Node2D" parent="."]
+position = Vector2(891, 773)
+script = ExtResource("2_k15in")
+metadata/_edit_group_ = true
+
+[node name="Icon" type="Sprite2D" parent="Castle"]
+position = Vector2(0, -426)
+scale = Vector2(5.4375, 6.95313)
+texture = ExtResource("1_f5r8l")
+
+[node name="ScoreTrigger" type="Area2D" parent="Castle"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Castle/ScoreTrigger"]
+position = Vector2(0, -91.25)
+shape = SubResource("RectangleShape2D_5rm36")
+debug_color = Color(0.815686, 0, 0.972549, 0.419608)
+
+[node name="Player" parent="." instance=ExtResource("2_tkvys")]
+position = Vector2(866, -87)
+motion_mode = 1
+platform_on_leave = 2
+
+[node name="CameraRig" type="Camera2D" parent="."]
+script = ExtResource("4_mj44r")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Score" type="MarginContainer" parent="GUI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="GUI/Score"]
+layout_mode = 2
+text = "<<SCORE>>"
+label_settings = SubResource("LabelSettings_fcb8d")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="YarnSpawner" type="Node" parent="."]
+script = ExtResource("6_m2h2p")
+scene = ExtResource("5_dyes2")
+
+[node name="Center" type="Marker2D" parent="YarnSpawner"]
+position = Vector2(891, 685)
