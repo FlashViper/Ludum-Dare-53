@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://b6nbc7iginl1p"]
+[gd_scene load_steps=11 format=3 uid="uid://bq35offvda3hv"]
 
 [ext_resource type="Script" path="res://player/player_node.gd" id="1_4h23a"]
-[ext_resource type="Script" path="res://player/player_state_machine.gd" id="2_yfoyd"]
+[ext_resource type="Script" path="res://player/states/player_state_machine.gd" id="2_nhcl8"]
 [ext_resource type="Script" path="res://player/states/movement.gd" id="3_gfbnw"]
 [ext_resource type="Script" path="res://player/states/launch.gd" id="3_j5cb2"]
-[ext_resource type="Script" path="res://player/glide.gd" id="3_na682"]
 [ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="4_lgbo2"]
+[ext_resource type="Script" path="res://player/states/glide.gd" id="4_yqpy0"]
+[ext_resource type="Script" path="res://player/states/dive.gd" id="6_w8a6q"]
+[ext_resource type="Script" path="res://player/player_visual.gd" id="7_n5v4d"]
 
 [sub_resource type="Curve" id="Curve_87u1w"]
 _data = [Vector2(0, 0), 0.0, 3.50369, 0, 0, Vector2(0.666667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.608108), -0.191268, 0.0, 0, 0]
@@ -18,25 +20,25 @@ radius = 60.075
 script = ExtResource("1_4h23a")
 
 [node name="States" type="Node" parent="."]
-script = ExtResource("2_yfoyd")
+script = ExtResource("2_nhcl8")
 
 [node name="Launch" type="Node" parent="States"]
 script = ExtResource("3_j5cb2")
 launch_modifier = SubResource("Curve_87u1w")
 
 [node name="Glide" type="Node" parent="States"]
-script = ExtResource("3_na682")
+script = ExtResource("4_yqpy0")
 
 [node name="Movement" type="Node" parent="States"]
 script = ExtResource("3_gfbnw")
 
-[node name="Jump" type="Node" parent="States"]
-
 [node name="Dive" type="Node" parent="States"]
+script = ExtResource("6_w8a6q")
 
 [node name="Visual" type="Node2D" parent="."]
+script = ExtResource("7_n5v4d")
 
-[node name="Icon" type="Sprite2D" parent="Visual"]
+[node name="Body" type="Sprite2D" parent="Visual"]
 texture = ExtResource("4_lgbo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

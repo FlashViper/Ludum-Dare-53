@@ -33,3 +33,4 @@ func _gameplay(delta: float) -> void:
 	
 	if player.height <= 0:
 		glide_finished.emit()
+		exit_to("Movement")

@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 
 func init_game() -> void:
 	time_remaining = time_per_round
-	$Player.position = Vector2(866, -87)
+	$Player.position = Vector2(866, 683)
 	$Player.reset()
 
 

@@ -11,6 +11,8 @@ func _ready() -> void:
 	
 	states.initialize(state)
 	states.set_state_by_name("Movement")
+	
+	$Visual.player = state
 
 
 func _physics_process(delta: float) -> void:

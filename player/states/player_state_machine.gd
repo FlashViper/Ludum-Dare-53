@@ -12,15 +12,22 @@ func initialize(player: Player) -> void:
 			state_name_mapping[obj.name] = obj
 			states.append(obj)
 			obj.player = player
+			obj.transition_requested.connect(set_state_by_name)
 			obj._initialize()
 	
 	set_state_by_name("Launch")
 	
-	$Glide.glide_finished.connect(set_state_by_name.bind("Movement"))
-	$Launch.launched.connect(set_state_by_name.bind("Glide"))
+#	$Glide.glide_finished.connect(set_state_by_name.bind("Movement"))
+#	$Launch.launched.connect(set_state_by_name.bind("Glide"))
 
 
 func on_physics_process(delta: float) -> void:
+	for s in states:
+		if s != current_state:
+			if s._request_focus():
+				set_state_by_name(s.name)
+				break
+	
 	if current_state:
 		current_state._gameplay(delta)
 

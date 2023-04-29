@@ -7,15 +7,25 @@ const GLIDE_COUNTERSTEER := 1000
 const GLIDE_DECEL := 100
 const GLIDE_SLOWDOWN := 1000
 
+const WALK_SPEED := 500
+const WALK_ACCEL := 3000
+const GROUND_DECEL := 2100
+const AIR_DECEL := 100
+
 const LAUNCH_SPEED := 2000
 
-const STARTING_HEIGHT := 50.0
-const COLLISION_HEIGHT := 2.0
+const JUMP_SPEED := 10
+const JUMP_BOOST := 800
+const GRAVITY := 25
+const COLLISION_HEIGHT := 1.0
 
-const FALL_RATE := 10.0
-const FALL_RATE_STATIONARY := 40.0
+const STARTING_HEIGHT := 5.0
+const FALL_RATE := 1.0
+const FALL_RATE_STATIONARY := 4.0
 
-const SPEED_WALK := 500
+const DIVE_SPEED := 1500
+const DIVE_DURATION := 0.15
+const DIVE_COOLDOWN := 0.35
 
 var body : CharacterBody2D
 var height : float
@@ -40,8 +50,6 @@ var velocity : Vector2 :
 	set(new):
 		if body:
 			body.velocity = new
-
-
 
 func get_mouse_position() -> Vector2:
 	if body:

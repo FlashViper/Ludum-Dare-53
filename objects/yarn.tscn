@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=5 format=3 uid="uid://dlnkg0a2q3mq2"]
 
-[ext_resource type="Script" path="res://objects/yarn.gd" id="1_rai4p"]
-[ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="2_finan"]
+[ext_resource type="Script" path="res://objects/yarn.gd" id="1_gm8hu"]
+[ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="2_k15eo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jt1bt"]
 radius = 86.0233
@@ -10,14 +10,12 @@ radius = 86.0233
 radius = 38.0132
 
 [node name="Yarn" type="CharacterBody2D"]
-position = Vector2(333, 421)
-script = ExtResource("1_rai4p")
+script = ExtResource("1_gm8hu")
 
 [node name="Visual" type="Sprite2D" parent="."]
 modulate = Color(1, 0.360784, 0.360784, 1)
 rotation = 0.785398
-scale = Vector2(1, 1)
-texture = ExtResource("2_finan")
+texture = ExtResource("2_k15eo")
 
 [node name="PlayerDribble" type="Area2D" parent="."]
 

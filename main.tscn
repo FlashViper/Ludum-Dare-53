@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://gui/main.gd" id="1_0407y"]
 [ext_resource type="PackedScene" uid="uid://du32u483dflsv" path="res://gui/title/title_screen.tscn" id="2_hnxo1"]
-[ext_resource type="PackedScene" uid="uid://8exork2x7csk" path="res://gameplay.tscn" id="3_orl1m"]
+[ext_resource type="PackedScene" uid="uid://c586rhkpw2ndw" path="res://systems/gameplay.tscn" id="3_ng1sb"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0407y")
 title_scene = ExtResource("2_hnxo1")
-gameplay_scene = ExtResource("3_orl1m")
+gameplay_scene = ExtResource("3_ng1sb")

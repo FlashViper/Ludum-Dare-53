@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://systems/gameplay.gd" id="1_rxybu"]
 [ext_resource type="Script" path="res://objects/castle.gd" id="2_hs334"]
 [ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="3_ep8vp"]
-[ext_resource type="PackedScene" uid="uid://b6nbc7iginl1p" path="res://player/player.tscn" id="4_xoiy0"]
+[ext_resource type="PackedScene" uid="uid://bq35offvda3hv" path="res://player/player.tscn" id="4_xoiy0"]
 [ext_resource type="Script" path="res://systems/camera/camera_rig.gd" id="5_ynp1e"]
 [ext_resource type="Script" path="res://systems/yarn_spawner.gd" id="6_e3khf"]
-[ext_resource type="PackedScene" path="res://objects/yarn.tscn" id="7_0deay"]
+[ext_resource type="PackedScene" uid="uid://dlnkg0a2q3mq2" path="res://objects/yarn.tscn" id="7_0deay"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rm36"]
 size = Vector2(326, 289.5)
@@ -35,7 +35,7 @@ shape = SubResource("RectangleShape2D_5rm36")
 debug_color = Color(0.815686, 0, 0.972549, 0.419608)
 
 [node name="Player" parent="." instance=ExtResource("4_xoiy0")]
-position = Vector2(866, -87)
+position = Vector2(895, 683)
 motion_mode = 1
 platform_on_leave = 2
 

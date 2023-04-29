@@ -27,5 +27,7 @@ func _gameplay(delta: float) -> void:
 func launch(launch_dir : Vector2) -> void:
 	player.velocity = Player.LAUNCH_SPEED * launch_dir
 	player.velocity *= launch_modifier.sample(t_power / max_time)
-	launched.emit()
 	t_power = 0
+	
+	launched.emit()
+	exit_to("Glide")
