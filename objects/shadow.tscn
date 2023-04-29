@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://clxfoe5rmeonm"]
+
+[ext_resource type="Texture2D" uid="uid://bafp88mrw4uvo" path="res://player/shadow.png" id="1_htn5p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qjat"]
+atlas = ExtResource("1_htn5p")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp757"]
+atlas = ExtResource("1_htn5p")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xj44m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qjat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp757")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Shadow" type="AnimatedSprite2D"]
+position = Vector2(-3, 42)
+sprite_frames = SubResource("SpriteFrames_xj44m")
+autoplay = "default"
+frame_progress = 0.559775
