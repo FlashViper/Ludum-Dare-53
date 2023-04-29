@@ -1,0 +1,11 @@
+{
+	"disabled_build_options": {
+		"disable_3d": true,
+		"openxr": false
+	},
+	"disabled_classes": [
+		"NavigationObstacle3D",
+		"Node3D"
+	],
+	"type": "build_profile"
+}
