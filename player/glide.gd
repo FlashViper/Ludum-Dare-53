@@ -2,13 +2,9 @@ extends PlayerState
 
 signal glide_finished
 
-var height : float
-
 
 func _enter() -> void:
-	height = Player.STARTING_HEIGHT
-	
-	player.body.get_node("CollisionShape2D").disabled = true
+	player.height = Player.STARTING_HEIGHT
 
 
 func _gameplay(delta: float) -> void:
@@ -29,11 +25,11 @@ func _gameplay(delta: float) -> void:
 		acceleration * delta
 	)
 	
-	height = move_toward(height, 0, fall_rate * delta)
+	player.height = move_toward(
+		player.height,
+		0,
+		fall_rate * delta
+	)
 	
-	if height <= 0:
+	if player.height <= 0:
 		glide_finished.emit()
-
-
-func _exit() -> void:
-	player.body.get_node("CollisionShape2D").disabled = false

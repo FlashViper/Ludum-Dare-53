@@ -30,6 +30,10 @@ script = ExtResource("3_na682")
 [node name="Movement" type="Node" parent="States"]
 script = ExtResource("3_gfbnw")
 
+[node name="Jump" type="Node" parent="States"]
+
+[node name="Dive" type="Node" parent="States"]
+
 [node name="Visual" type="Node2D" parent="."]
 
 [node name="Icon" type="Sprite2D" parent="Visual"]

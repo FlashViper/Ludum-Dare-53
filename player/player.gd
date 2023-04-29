@@ -10,13 +10,15 @@ const GLIDE_SLOWDOWN := 1000
 const LAUNCH_SPEED := 2000
 
 const STARTING_HEIGHT := 50.0
+const COLLISION_HEIGHT := 2.0
+
 const FALL_RATE := 10.0
 const FALL_RATE_STATIONARY := 40.0
 
 const SPEED_WALK := 500
 
 var body : CharacterBody2D
-
+var height : float
 
 var position : Vector2 :
 	get:
