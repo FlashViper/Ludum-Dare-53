@@ -84,6 +84,12 @@ dive={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Default"
+2d_physics/layer_2="Yarn"
+2d_physics/layer_3="Score"
+
 [physics]
 
 2d/default_gravity=0.0
