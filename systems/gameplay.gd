@@ -11,7 +11,7 @@ enum {
 
 @export var time_per_round := 60.0
 
-@onready var camera: Camera2D = $CameraRig
+@onready var camera: Camera2D = $Camera
 
 var score : int
 var state : int
@@ -19,21 +19,18 @@ var time_remaining : float
 
 
 func _ready() -> void:
-	camera.set_target($Player, true)
+#	camera.set_target($Player, true)
 	$Castle.scored.connect(on_scored)
-	update_score()
-	
+	camera.add_target($Castle.get_player_respawn(), 0.5)
+	camera.add_target($Player, 2.0)
 	init_game()
 	start_game()
 
 
 func on_scored(points: int) -> void:
 	score += points
-	update_score()
-
-
-func update_score() -> void:
-	$GUI/Score/Label.text = str(score)
+	camera.shake(0.5)
+	$Player.update_score(score, points)
 
 
 func _process(delta: float) -> void:
@@ -51,8 +48,10 @@ func _process(delta: float) -> void:
 	
 
 func init_game() -> void:
+	state = STATE_PREGAME
 	time_remaining = time_per_round
-	$Player.position = Vector2(866, 683)
+	$Player.position = $Castle.get_player_respawn().global_position
+	$YarnSpawner.initialize()
 	$Player.reset()
 
 

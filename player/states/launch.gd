@@ -9,6 +9,14 @@ signal launched
 var t_power : float
 
 
+func _enter() -> void:
+	player.body.z_index = 1
+
+
+func _exit() -> void:
+	player.body.z_index = 0
+
+
 func _gameplay(delta: float) -> void:
 	player.velocity = Vector2()
 	if InputManager.charge_launch:
@@ -27,7 +35,13 @@ func _gameplay(delta: float) -> void:
 func launch(launch_dir : Vector2) -> void:
 	player.velocity = Player.LAUNCH_SPEED * launch_dir
 	player.velocity *= launch_modifier.sample(t_power / max_time)
+	player.position.y -= (Player.STARTING_HEIGHT - 1) * -100
+	player.height = Player.STARTING_HEIGHT
 	t_power = 0
 	
 	launched.emit()
 	exit_to("Glide")
+
+
+func _get_priority() -> int:
+	return 5

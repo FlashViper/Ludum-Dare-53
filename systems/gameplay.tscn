@@ -1,46 +1,32 @@
 [gd_scene load_steps=10 format=3 uid="uid://c586rhkpw2ndw"]
 
 [ext_resource type="Script" path="res://systems/gameplay.gd" id="1_rxybu"]
-[ext_resource type="Script" path="res://objects/castle.gd" id="2_hs334"]
-[ext_resource type="Texture2D" uid="uid://dpb8u7mse50w7" path="res://icon.svg" id="3_ep8vp"]
+[ext_resource type="PackedScene" uid="uid://dwihajjyom1pj" path="res://objects/castle.tscn" id="2_lg5wy"]
+[ext_resource type="PackedScene" uid="uid://c0kgqsdnhrnyi" path="res://objects/environment.tscn" id="2_vq636"]
 [ext_resource type="PackedScene" uid="uid://bq35offvda3hv" path="res://player/player.tscn" id="4_xoiy0"]
 [ext_resource type="Script" path="res://systems/camera/camera_rig.gd" id="5_ynp1e"]
 [ext_resource type="Script" path="res://systems/yarn_spawner.gd" id="6_e3khf"]
 [ext_resource type="PackedScene" uid="uid://dlnkg0a2q3mq2" path="res://objects/yarn.tscn" id="7_0deay"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rm36"]
-size = Vector2(326, 289.5)
-
 [sub_resource type="LabelSettings" id="LabelSettings_fcb8d"]
 font_size = 64
 
-[node name="Gameplay" type="Node"]
+[sub_resource type="Curve" id="Curve_4vuh2"]
+_data = [Vector2(0, 0), 0.0, 2.96396, 0, 0, Vector2(1, 1), 0.0567083, 0.0, 0, 0]
+point_count = 2
+
+[node name="Gameplay" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_rxybu")
 
-[node name="Castle" type="Node2D" parent="."]
-position = Vector2(891, 773)
-script = ExtResource("2_hs334")
-metadata/_edit_group_ = true
+[node name="Environment" parent="." instance=ExtResource("2_vq636")]
 
-[node name="Icon" type="Sprite2D" parent="Castle"]
-position = Vector2(0, -426)
-scale = Vector2(5.4375, 6.95313)
-texture = ExtResource("3_ep8vp")
-
-[node name="ScoreTrigger" type="Area2D" parent="Castle"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Castle/ScoreTrigger"]
-position = Vector2(0, -91.25)
-shape = SubResource("RectangleShape2D_5rm36")
-debug_color = Color(0.815686, 0, 0.972549, 0.419608)
+[node name="Castle" parent="." instance=ExtResource("2_lg5wy")]
 
 [node name="Player" parent="." instance=ExtResource("4_xoiy0")]
-position = Vector2(895, 683)
 motion_mode = 1
 platform_on_leave = 2
-
-[node name="CameraRig" type="Camera2D" parent="."]
-script = ExtResource("5_ynp1e")
+layers_air = 16
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -60,9 +46,16 @@ label_settings = SubResource("LabelSettings_fcb8d")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="YarnSpawner" type="Node" parent="."]
+[node name="YarnSpawner" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("6_e3khf")
 scene = ExtResource("7_0deay")
+radius_inner = 900
+radius_outer = 2900
 
-[node name="Center" type="Marker2D" parent="YarnSpawner"]
-position = Vector2(891, 685)
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("5_ynp1e")
+max_offset = Vector2(150, 50)
+trauma_curve = SubResource("Curve_4vuh2")
+min_zoom = 1.1
+max_zoom = 0.75

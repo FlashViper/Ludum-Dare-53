@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjx8hwm4xsoyy"]
+
+[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://environment.png" id="1_41e3v"]
+[ext_resource type="Script" path="res://objects/environment/visibility_trigger.gd" id="2_8sb8x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xqi3"]
+radius = 129.0
+height = 412.0
+
+[node name="Rock_Tall" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -167)
+texture = ExtResource("1_41e3v")
+region_enabled = true
+region_rect = Rect2(7.14913, 1047.57, 372.68, 512.436)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -167)
+polygon = PackedVector2Array(-167, 185, -139, 198, -95, 194, -84, 212, -45, 217, -24, 210, 26, 209, 33, 244, 71, 252, 128, 248, 145, 227, 148, 179, 145, 146, 51, 128, -54, 124, -148, 139, -175, 157)
+
+[node name="VisibilityTrigger" type="Area2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(0, -167)
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("2_8sb8x")
+target = NodePath("../Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibilityTrigger"]
+position = Vector2(-7, -17)
+shape = SubResource("CapsuleShape2D_6xqi3")

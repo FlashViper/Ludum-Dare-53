@@ -25,7 +25,8 @@ func on_physics_process(delta: float) -> void:
 	for s in states:
 		if s != current_state:
 			if s._request_focus():
-				set_state_by_name(s.name)
+				if s._get_priority() >= current_state._get_priority():
+					set_state_by_name(s.name)
 				break
 	
 	if current_state:

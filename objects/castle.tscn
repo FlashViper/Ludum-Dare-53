@@ -1,0 +1,171 @@
+[gd_scene load_steps=16 format=3 uid="uid://dwihajjyom1pj"]
+
+[ext_resource type="Script" path="res://objects/castle.gd" id="1_pl4a4"]
+[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://environment.png" id="2_sr7kt"]
+[ext_resource type="Texture2D" uid="uid://b4jblidc3tb55" path="res://objects/yarn.png" id="3_5my3h"]
+[ext_resource type="Script" path="res://objects/environment/visibility_trigger.gd" id="3_e67ho"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lunx"]
+atlas = ExtResource("2_sr7kt")
+region = Rect2(97, 32, 229, 164)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3pv6"]
+atlas = ExtResource("2_sr7kt")
+region = Rect2(326, 32, 229, 164)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6k6n"]
+atlas = ExtResource("2_sr7kt")
+region = Rect2(97, 196, 229, 164)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j6r8u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lunx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3pv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6k6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lunx")
+}],
+"loop": true,
+"name": &"wave",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_qkshw"]
+resource_name = "castle_score"
+script/source = "extends Node2D
+
+@onready var yarn: CPUParticles2D = $Yarn
+@onready var stars: CPUParticles2D = $Stars
+
+func score() -> void:
+	yarn.restart()
+	stars.restart()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvfmt"]
+atlas = ExtResource("3_5my3h")
+region = Rect2(0, 0, 129, 127)
+
+[sub_resource type="Curve" id="Curve_skpy0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.662791, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.734234), -0.788133, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_cs40a"]
+offsets = PackedFloat32Array(0, 0.860825, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dm0vi"]
+atlas = ExtResource("2_sr7kt")
+region = Rect2(7, 1671, 223, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rm36"]
+size = Vector2(326, 289.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpdl3"]
+size = Vector2(652, 843)
+
+[node name="Castle" type="Node2D"]
+script = ExtResource("1_pl4a4")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Castle" type="Sprite2D" parent="Visual"]
+position = Vector2(7, -426)
+texture = ExtResource("2_sr7kt")
+region_enabled = true
+region_rect = Rect2(629.245, 455.408, 744.664, 1052.8)
+
+[node name="Flegpole" type="Sprite2D" parent="Visual"]
+position = Vector2(-125, -840)
+texture = ExtResource("2_sr7kt")
+offset = Vector2(-1, -177)
+region_enabled = true
+region_rect = Rect2(18.4548, 21.5455, 78.1818, 424.546)
+
+[node name="Fleg" type="AnimatedSprite2D" parent="Visual"]
+position = Vector2(-17, -1134)
+sprite_frames = SubResource("SpriteFrames_j6r8u")
+animation = &"wave"
+autoplay = "wave"
+frame_progress = 0.576349
+
+[node name="Respawn" type="Marker2D" parent="Visual"]
+unique_name_in_owner = true
+position = Vector2(0, -877)
+gizmo_extents = 46.0
+
+[node name="LaunchPosition" type="Marker2D" parent="Visual"]
+unique_name_in_owner = true
+
+[node name="ScoreEffects" type="Node2D" parent="Visual"]
+script = SubResource("GDScript_qkshw")
+
+[node name="Yarn" type="CPUParticles2D" parent="Visual/ScoreEffects"]
+z_index = 1
+position = Vector2(0, -34)
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.57
+texture = SubResource("AtlasTexture_rvfmt")
+direction = Vector2(0, -1)
+spread = 143.75
+initial_velocity_min = 500.0
+initial_velocity_max = 2500.0
+angular_velocity_max = 100.0
+linear_accel_min = -1000.0
+linear_accel_max = -500.0
+angle_max = 720.0
+scale_amount_min = 0.25
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_skpy0")
+color_ramp = SubResource("Gradient_cs40a")
+
+[node name="Stars" type="CPUParticles2D" parent="Visual/ScoreEffects"]
+z_index = 1
+position = Vector2(0, -34)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.57
+texture = SubResource("AtlasTexture_dm0vi")
+direction = Vector2(0, -1)
+spread = 143.75
+initial_velocity_min = 500.0
+initial_velocity_max = 2500.0
+angular_velocity_max = 100.0
+linear_accel_min = -1000.0
+linear_accel_max = -500.0
+angle_max = 720.0
+scale_amount_min = 0.25
+scale_amount_curve = SubResource("Curve_skpy0")
+color_ramp = SubResource("Gradient_cs40a")
+
+[node name="ScoreTrigger" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreTrigger"]
+position = Vector2(4, -31.75)
+shape = SubResource("RectangleShape2D_5rm36")
+debug_color = Color(0.815686, 0, 0.972549, 0.419608)
+
+[node name="InvisibilityTrigger" type="Area2D" parent="." node_paths=PackedStringArray("target")]
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("3_e67ho")
+target = NodePath("../Visual")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibilityTrigger"]
+position = Vector2(13, -431.5)
+shape = SubResource("RectangleShape2D_mpdl3")
