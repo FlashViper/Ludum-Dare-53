@@ -29,6 +29,7 @@ func _physics_process(delta: float) -> void:
 		
 		velocity = velocity.bounce(collision_info.get_normal())
 		velocity *= bounce_decay
+		squoosh(collision_info.get_normal(), velocity.length())
 
 
 func bounce(area: Area2D) -> void:
@@ -44,12 +45,15 @@ func bounce(area: Area2D) -> void:
 
 
 func bounce_effect(direction: Vector2, strength: float) -> void:
+	$BumpSound.play()
+	play_yarn_particles(direction)
+	squoosh(direction, strength)
+	
+
+
+func squoosh(direction: Vector2, strength: float) -> void:
 	var t := create_tween().set_parallel(true)
 	var strength_fac := clampf(strength / 3000, 0, 1)
-	
-	play_yarn_particles(direction)
-	
-	$BumpSound.play()
 	%BallRoot.rotation = direction.angle()
 	%BallRoot.position.y = -30
 	%Ball.rotation = -direction.angle()
