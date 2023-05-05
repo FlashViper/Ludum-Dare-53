@@ -1,0 +1,212 @@
+[gd_scene load_steps=14 format=3 uid="uid://bw6m2oolow3l3"]
+
+[ext_resource type="Theme" uid="uid://pkwo8w50eu64" path="res://gui/theme_default.tres" id="1_anho4"]
+[ext_resource type="Script" path="res://gui/win_panel.gd" id="2_8neq0"]
+[ext_resource type="Texture2D" uid="uid://blmnxru2ol0wn" path="res://assets/title.png" id="2_qnhm2"]
+[ext_resource type="FontFile" uid="uid://c0yvxhgya2sey" path="res://gui/fonts/LuckiestGuy-Regular.ttf" id="3_qifcc"]
+
+[sub_resource type="Curve" id="Curve_2pev6"]
+_data = [Vector2(0, 0), 0.0, 2.17137, 0, 0, Vector2(1, 1), -5.43711e-07, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_ba3ym"]
+font_size = 146
+
+[sub_resource type="LabelSettings" id="LabelSettings_t54sy"]
+font_size = 91
+
+[sub_resource type="LabelSettings" id="LabelSettings_6fo6m"]
+font_size = 52
+font_color = Color(0.462745, 0.403922, 0.839216, 0.490196)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_71icu"]
+texture = ExtResource("2_qnhm2")
+texture_margin_left = 24.0
+texture_margin_top = 26.0
+texture_margin_right = 31.0
+texture_margin_bottom = 22.0
+region_rect = Rect2(29, 932, 123, 123)
+modulate_color = Color(0, 0.34902, 0.701961, 1)
+
+[sub_resource type="Animation" id="Animation_qr2cj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Score/ScoreText:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Highscore/HighScoreText:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_4quel"]
+resource_name = "high_score"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Highscore/HighScoreText:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(5.85634, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mr2qb"]
+resource_name = "score"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/VBoxContainer/VBoxContainer/Score/ScoreText:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(5.85634, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ljhjx"]
+_data = {
+"RESET": SubResource("Animation_qr2cj"),
+"high_score": SubResource("Animation_4quel"),
+"score": SubResource("Animation_mr2qb")
+}
+
+[node name="WinPanel" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -754.0
+offset_top = -560.0
+offset_right = 664.0
+offset_bottom = 528.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_anho4")
+script = ExtResource("2_8neq0")
+countup_curve = SubResource("Curve_2pev6")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_qnhm2")
+region_rect = Rect2(167.809, 913.683, 153.886, 154.101)
+patch_margin_left = 34
+patch_margin_top = 39
+patch_margin_right = 34
+patch_margin_bottom = 37
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 29
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_qifcc")
+text = "Game Complete!"
+label_settings = SubResource("LabelSettings_ba3ym")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Score" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Score"]
+layout_mode = 2
+text = "Score:"
+label_settings = SubResource("LabelSettings_t54sy")
+
+[node name="ScoreText" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Score"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "<####>"
+label_settings = SubResource("LabelSettings_t54sy")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Highscore" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 200
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Highscore"]
+layout_mode = 2
+text = "High Score:"
+label_settings = SubResource("LabelSettings_t54sy")
+
+[node name="HighScoreText" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/Highscore"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "<####>"
+label_settings = SubResource("LabelSettings_t54sy")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_qifcc")
+text = "You feel a sigh of relief
+And yet, visions of yarn still haunt you
+Will you ever escape?"
+label_settings = SubResource("LabelSettings_6fo6m")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxTexture_71icu")
+text = "Continue Playing"
+
+[node name="Title" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 42
+theme_override_styles/normal = SubResource("StyleBoxTexture_71icu")
+text = "Return to Title"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ljhjx")
+}

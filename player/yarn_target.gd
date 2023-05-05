@@ -18,9 +18,9 @@ func _process(delta: float) -> void:
 			"distance": (t.position - global_position).length()
 		})
 	
-	yarn.sort_custom(func(a,b): a.distance < b.distance)
-	if yarn.size() < 1 or yarn[0].distance < 1000:
-		yarn = []
+#	yarn.sort_custom(func(a,b): a.distance < b.distance)
+#	if yarn.size() < 1 or yarn[0].distance < 1000:
+#		yarn = []
 	queue_redraw()
 
 

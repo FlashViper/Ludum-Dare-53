@@ -15,8 +15,6 @@ func initialize(player: Player) -> void:
 			obj.transition_requested.connect(set_state_by_name)
 			obj._initialize()
 	
-	set_state_by_name("Launch")
-	
 #	$Glide.glide_finished.connect(set_state_by_name.bind("Movement"))
 #	$Launch.launched.connect(set_state_by_name.bind("Glide"))
 

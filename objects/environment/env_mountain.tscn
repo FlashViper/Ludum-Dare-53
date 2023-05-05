@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://rpuycyk1kk55"]
+[gd_scene load_steps=6 format=3 uid="uid://r1jxwb53up87"]
 
-[ext_resource type="Texture2D" uid="uid://c4hc8wlhfp5o8" path="res://mountain.png" id="1_opvee"]
+[ext_resource type="Texture2D" uid="uid://c4hc8wlhfp5o8" path="res://assets/mountain.png" id="1_opvee"]
 [ext_resource type="Script" path="res://objects/environment/visibility_trigger.gd" id="2_wgubs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o23a2"]
@@ -10,6 +10,9 @@ height = 826.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1eoud"]
 radius = 281.0
 height = 788.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hjwp"]
+size = Vector2(735, 457)
 
 [node name="Mountain" type="Sprite2D"]
 position = Vector2(-2, 400)
@@ -34,3 +37,12 @@ position = Vector2(18, 181)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_1eoud")
 debug_color = Color(0, 0.596078, 0.701961, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 17
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 2
+position = Vector2(42.5, -174.5)
+shape = SubResource("RectangleShape2D_0hjwp")

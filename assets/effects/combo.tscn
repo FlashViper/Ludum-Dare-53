@@ -1,0 +1,264 @@
+[gd_scene load_steps=12 format=3 uid="uid://blx4jn43npxp8"]
+
+[ext_resource type="Script" path="res://assets/effects/combo_popup.gd" id="1_2yepl"]
+[ext_resource type="Texture2D" uid="uid://blmnxru2ol0wn" path="res://assets/title.png" id="1_4ivwl"]
+[ext_resource type="PackedScene" uid="uid://clxfoe5rmeonm" path="res://objects/shadow.tscn" id="2_wplkd"]
+[ext_resource type="FontFile" uid="uid://c0yvxhgya2sey" path="res://gui/fonts/LuckiestGuy-Regular.ttf" id="3_te3sm"]
+[ext_resource type="Texture2D" uid="uid://difamkxke4mjx" path="res://assets/particles_yarn.tres" id="5_lrmwo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7bda3"]
+font_size = 24
+font_color = Color(0.819608, 0, 0.396078, 1)
+outline_color = Color(1, 0, 0.482353, 1)
+
+[sub_resource type="Animation" id="Animation_tptrm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-20.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Text:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Text/ComboText:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Text/ComboText:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(72.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_punsq"]
+resource_name = "popup"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(43, -0.25, 0, 0.203626, -71.267, -20.5, -0.25, 0, 0.222969, 14.4899, -10.2234, -0.244113, 3.68664, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 1.98929)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Text:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 3, 3, 0),
+"points": PackedFloat32Array(0.913253, -0.25, 0, 0.1, 0.097652, 1.18795, -0.0655813, -0.00628495, 0.0655813, 0.00628495, 0.79759, -0.0668066, -0.0111727, 0.0668066, 0.0111727, 1, -0.0724632, 0.0313046, 0.025, 0.148053),
+"times": PackedFloat32Array(0, 0.109358, 0.254973, 0.435938)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Text:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1.36134, -0.25, 0, 0.1, -0.127898, 0.955799, -0.0489467, -0.00397396, 0.0561981, 0.0119219, 1.19385, -0.1, 0.000113845, 0.0991188, -0.166521, 1.07156, -0.101788, -0.0442312, 0.1, 0.00693107),
+"times": PackedFloat32Array(0, 0.0987999, 0.228099, 0.409064)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Text/ComboText:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(99.0696, -0.25, 0, 0.0546376, -39.0093, 72.5, -0.0719321, -0.33181, 0.25, 0),
+"times": PackedFloat32Array(0.2, 0.77702)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Text/ComboText:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.218376, 0.682526),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.8028, 1.95017),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HitParticles")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0101881),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.9989),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_urids"]
+_data = {
+"RESET": SubResource("Animation_tptrm"),
+"popup": SubResource("Animation_punsq")
+}
+
+[sub_resource type="Curve" id="Curve_m5275"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.565892, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.653153), -0.798986, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_fv2so"]
+offsets = PackedFloat32Array(0, 0.695876, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Combo" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_2yepl")
+
+[node name="Text" type="Sprite2D" parent="."]
+z_index = 5
+position = Vector2(-1.5, -20.5)
+texture = ExtResource("1_4ivwl")
+region_enabled = true
+region_rect = Rect2(1310, 65, 415, 119)
+
+[node name="ComboText" type="Control" parent="Text"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 72.5
+offset_right = 4.0
+offset_bottom = 72.5
+metadata/_edit_group_ = true
+
+[node name="ScoreText" type="Label" parent="Text/ComboText"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.0
+offset_top = -18.5
+offset_right = 101.0
+offset_bottom = 18.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(70, 13)
+theme_override_fonts/font = ExtResource("3_te3sm")
+text = "+ <SCORE> points"
+label_settings = SubResource("LabelSettings_7bda3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shadow" parent="." instance=ExtResource("2_wplkd")]
+z_index = -1
+position = Vector2(-3, 86)
+scale = Vector2(3, 1)
+frame_progress = 0.52559
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_urids")
+}
+
+[node name="HitParticles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+emitting = false
+amount = 10
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.48
+texture = ExtResource("5_lrmwo")
+emission_shape = 1
+emission_sphere_radius = 60.0
+direction = Vector2(0, -1)
+spread = 87.71
+gravity = Vector2(0, 98)
+initial_velocity_min = 208.33
+initial_velocity_max = 881.94
+angular_velocity_min = -130.0
+angular_velocity_max = 110.0
+damping_min = 120.0
+damping_max = 200.0
+angle_max = 720.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_m5275")
+color = Color(1, 0.45098, 0.717647, 1)
+color_ramp = SubResource("Gradient_fv2so")

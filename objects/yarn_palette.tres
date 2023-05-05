@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ColorPalette" load_steps=2 format=3 uid="uid://bm70vtfafgcge"]
+
+[ext_resource type="Script" path="res://systems/color_palette.gd" id="1_teitn"]
+
+[resource]
+script = ExtResource("1_teitn")
+colors = Array[Color]([Color(0.690196, 0.72549, 0.909804, 1), Color(1, 0, 0.0156863, 1), Color(0.458824, 0.00392157, 0.854902, 1), Color(1, 0.8, 0, 1), Color(1, 0, 0.835294, 1)])

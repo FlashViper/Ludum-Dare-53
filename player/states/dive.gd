@@ -24,7 +24,7 @@ func _enter() -> void:
 	if player.velocity.dot(dir) + Player.DIVE_SPEED > Player.DIVE_SPEED:
 		player.velocity += Player.DIVE_SPEED * dir
 	else:
-		player.velocity += Player.DIVE_SPEED * dir
+		player.velocity = Player.DIVE_SPEED * dir
 	t_duration = 0.0
 
 
@@ -37,7 +37,7 @@ func _gameplay(delta: float) -> void:
 		t_cooldown = Player.DIVE_COOLDOWN
 		exit_to("Movement")
 	else:
-		if InputManager.jump:
+		if InputManager.jump and player.height < Player.COLLISION_HEIGHT:
 			player.velocity_z = 5
 			player.height = 0.0001
 			exit_to("Movement")

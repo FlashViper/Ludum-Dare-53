@@ -1,0 +1,604 @@
+[gd_scene load_steps=36 format=3 uid="uid://dsmmlfml4mfpq"]
+
+[ext_resource type="Texture2D" uid="uid://bf8k0aemy1ho7" path="res://assets/tutorial/obj_inside_floor.tres" id="1_4wwor"]
+[ext_resource type="Script" path="res://tutorial.gd" id="1_63kp1"]
+[ext_resource type="Texture2D" uid="uid://dpcmhc03ayc32" path="res://assets/tutorial/obj_inside_wall.tres" id="1_snwhb"]
+[ext_resource type="PackedScene" uid="uid://bq35offvda3hv" path="res://player/player.tscn" id="2_7xbtt"]
+[ext_resource type="Texture2D" uid="uid://cnu7n4jl8m0cl" path="res://assets/tutorial/obj_inside_window.tres" id="2_jtt42"]
+[ext_resource type="Texture2D" uid="uid://bok745v6r7s2w" path="res://assets/tutorial/obj_inside_wood.tres" id="2_x3k7p"]
+[ext_resource type="Texture2D" uid="uid://b6swxl3q8x7c0" path="res://assets/tutorial/obj_inside_light.tres" id="5_4jkpp"]
+[ext_resource type="Script" path="res://systems/pushing/push_from_center.gd" id="7_g2jtk"]
+[ext_resource type="PackedScene" uid="uid://bu6q5t08qnecu" path="res://objects/environment/env_rock_purple.tscn" id="7_s2x2f"]
+[ext_resource type="PackedScene" path="res://objects/environment/env_rock_tall.tscn" id="8_bsouo"]
+[ext_resource type="PackedScene" uid="uid://dlnkg0a2q3mq2" path="res://objects/yarn.tscn" id="9_btuvg"]
+[ext_resource type="Script" path="res://systems/camera_bounds.gd" id="10_e0xmd"]
+[ext_resource type="PackedScene" uid="uid://ciyuyhgj2lx8v" path="res://objects/castle.tscn" id="11_vkq7s"]
+[ext_resource type="Texture2D" uid="uid://blmnxru2ol0wn" path="res://assets/title.png" id="12_oqxuq"]
+[ext_resource type="Script" path="res://misc/Tutorial_01.gd" id="14_cqvlr"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0wsrk"]
+blend_mode = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_022ok"]
+font_size = 48
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ra0hq"]
+radius = 131.858
+
+[sub_resource type="LabelSettings" id="LabelSettings_utrun"]
+font_size = 50
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vptiu"]
+size = Vector2(1400, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i281q"]
+size = Vector2(224, 844)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnyyq"]
+size = Vector2(90, 681)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vdu41"]
+size = Vector2(90, 1462)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mwd8"]
+size = Vector2(1559, 76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vodh"]
+size = Vector2(201, 383)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bkbgi"]
+radius = 207.8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l6ye0"]
+size = Vector2(384, 606)
+
+[sub_resource type="Animation" id="Animation_y5slf"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tutorial_01/Tutorial:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Tutorial_01/Tutorial:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_yhpt7"]
+resource_name = "bob"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Tutorial_01/Tutorial:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.2, -7.4719, -14.2843, -0.25, 0, 0.25, 0, 15.1987, -0.25, 0, 0.25, 0, 0, -0.2, 7.71632, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1.4, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ng20c"]
+_data = {
+"RESET": SubResource("Animation_y5slf"),
+"bob": SubResource("Animation_yhpt7")
+}
+
+[sub_resource type="Animation" id="Animation_1jyqe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qsfxr"]
+resource_name = "appear"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_115jm"]
+resource_name = "hidden"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4yr2g"]
+_data = {
+"RESET": SubResource("Animation_1jyqe"),
+"appear": SubResource("Animation_qsfxr"),
+"hidden": SubResource("Animation_115jm")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fl1ro"]
+size = Vector2(334, 315)
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_63kp1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -6
+offset_left = -2184.0
+offset_top = -1442.0
+offset_right = 5004.0
+offset_bottom = 2029.0
+mouse_filter = 2
+color = Color(0, 0.133333, 0.298039, 1)
+metadata/_edit_lock_ = true
+
+[node name="Decoration" type="Node2D" parent="."]
+
+[node name="ObjInsideWall" type="Sprite2D" parent="Decoration"]
+z_index = 1
+position = Vector2(776, 99)
+texture = ExtResource("1_snwhb")
+
+[node name="ObjInsideFloor" type="Sprite2D" parent="Decoration"]
+z_index = -2
+position = Vector2(1340, 105)
+scale = Vector2(8.21429, 2.07143)
+texture = ExtResource("1_4wwor")
+
+[node name="ObjInsideWood7" type="Sprite2D" parent="Decoration/ObjInsideFloor"]
+position = Vector2(-52.4696, -35.7241)
+scale = Vector2(0.121739, 0.482759)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood8" type="Sprite2D" parent="Decoration/ObjInsideFloor"]
+position = Vector2(-19.8435, 35.7241)
+scale = Vector2(0.121739, 0.482759)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood9" type="Sprite2D" parent="Decoration/ObjInsideFloor"]
+position = Vector2(49.4261, -42.4828)
+scale = Vector2(0.121739, 0.482759)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood11" type="Sprite2D" parent="Decoration/ObjInsideFloor"]
+position = Vector2(41.0261, 40.069)
+scale = Vector2(0.121739, 0.482759)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood10" type="Sprite2D" parent="Decoration/ObjInsideFloor"]
+position = Vector2(11.0784, -14.4828)
+scale = Vector2(0.121739, 0.482759)
+texture = ExtResource("2_x3k7p")
+
+[node name="Floor" type="Sprite2D" parent="Decoration"]
+clip_children = 2
+z_index = -2
+position = Vector2(0, 146)
+scale = Vector2(7.64497, 3.94083)
+texture = ExtResource("1_4wwor")
+metadata/_edit_lock_ = true
+
+[node name="ObjInsideWood" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(-66.3181, 69.7823)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood3" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(3.13932, 30.4504)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood5" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(52.1912, 8.88139)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood11" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(67.4954, 63.1847)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood10" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(54.1533, -53.0345)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood9" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(-41.3344, -10.9114)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood6" type="Sprite2D" parent="Decoration/Floor"]
+position = Vector2(-65.5333, -66.2297)
+scale = Vector2(0.130805, 0.253754)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideFloor2" type="Sprite2D" parent="Decoration"]
+z_index = -2
+position = Vector2(2720.5, 400)
+scale = Vector2(8.3869, 8.25)
+texture = ExtResource("1_4wwor")
+
+[node name="ObjInsideWood12" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(-58.3649, -67.5152)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood13" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(-40.9567, -43.5152)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood14" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(-56.6956, 21.9394)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood15" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(-28.6755, 48.1212)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood16" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(-52.5222, 69.4546)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood17" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(28.1987, 27.394)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood18" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(46.0837, 53.3333)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="ObjInsideWood19" type="Sprite2D" parent="Decoration/ObjInsideFloor2"]
+position = Vector2(61.3457, -34.7879)
+scale = Vector2(0.119234, 0.121212)
+texture = ExtResource("2_x3k7p")
+
+[node name="Windows" type="Node" parent="Decoration"]
+
+[node name="ObjInsideWindow" type="Sprite2D" parent="Decoration/Windows"]
+position = Vector2(-382, -376.5)
+texture = ExtResource("2_jtt42")
+
+[node name="ObjInsideWindow2" type="Sprite2D" parent="Decoration/Windows"]
+position = Vector2(-7, -383.5)
+texture = ExtResource("2_jtt42")
+
+[node name="ObjInsideWindow3" type="Sprite2D" parent="Decoration/Windows"]
+position = Vector2(368, -383.5)
+texture = ExtResource("2_jtt42")
+
+[node name="ObjInsideLight2" type="Sprite2D" parent="Decoration/Windows"]
+modulate = Color(1, 1, 1, 0.784314)
+z_index = 2
+material = SubResource("CanvasItemMaterial_0wsrk")
+position = Vector2(-7, -201.5)
+texture = ExtResource("5_4jkpp")
+
+[node name="ObjInsideLight3" type="Sprite2D" parent="Decoration/Windows"]
+modulate = Color(1, 1, 1, 0.784314)
+z_index = 2
+material = SubResource("CanvasItemMaterial_0wsrk")
+position = Vector2(378, -201.5)
+texture = ExtResource("5_4jkpp")
+
+[node name="ObjInsideLight4" type="Sprite2D" parent="Decoration/Windows"]
+modulate = Color(1, 1, 1, 0.784314)
+z_index = 2
+material = SubResource("CanvasItemMaterial_0wsrk")
+position = Vector2(-364, -201.5)
+texture = ExtResource("5_4jkpp")
+
+[node name="hello" type="Label" parent="."]
+offset_left = -705.0
+offset_top = -211.0
+offset_right = -534.0
+offset_bottom = -141.0
+scale = Vector2(1, 0.9156)
+text = "Hello :3"
+label_settings = SubResource("LabelSettings_022ok")
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 2427.0
+offset_top = 408.0
+offset_right = 3004.0
+offset_bottom = 548.0
+scale = Vector2(1, 0.9156)
+text = "Deliver yarn to the castle
+to score points"
+label_settings = SubResource("LabelSettings_022ok")
+horizontal_alignment = 1
+
+[node name="PlayerDribble" type="Area2D" parent="Label4"]
+position = Vector2(927, -681.52)
+collision_layer = 2
+collision_mask = 10
+script = ExtResource("7_g2jtk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Label4/PlayerDribble"]
+shape = SubResource("CircleShape2D_ra0hq")
+debug_color = Color(0, 0.576471, 0.811765, 0.419608)
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 2408.0
+offset_top = 209.5
+offset_right = 2985.0
+offset_bottom = 349.5
+scale = Vector2(1, 0.9156)
+text = "Pounce
+Strike yarn with speed"
+label_settings = SubResource("LabelSettings_022ok")
+horizontal_alignment = 1
+
+[node name="secret tease" type="Label" parent="."]
+offset_left = 2362.0
+offset_top = -233.0
+offset_right = 3043.0
+offset_bottom = -17.0
+scale = Vector2(1, 0.9156)
+text = "Look beyond the mountains 
+to the southeast
+You will find peace"
+label_settings = SubResource("LabelSettings_utrun")
+horizontal_alignment = 1
+
+[node name="Collision" type="Node2D" parent="."]
+
+[node name="Boundary" type="StaticBody2D" parent="Collision"]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Boundary"]
+position = Vector2(0, -277)
+shape = SubResource("RectangleShape2D_vptiu")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Boundary"]
+position = Vector2(0, 574)
+shape = SubResource("RectangleShape2D_vptiu")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Boundary"]
+position = Vector2(1346, 370)
+shape = SubResource("RectangleShape2D_vptiu")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Boundary"]
+position = Vector2(1338, -162)
+shape = SubResource("RectangleShape2D_vptiu")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Boundary"]
+position = Vector2(-752, 139)
+shape = SubResource("RectangleShape2D_i281q")
+metadata/_edit_lock_ = true
+
+[node name="Boundary2" type="StaticBody2D" parent="Collision"]
+collision_layer = 17
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Boundary2"]
+position = Vector2(1982, -437)
+shape = SubResource("RectangleShape2D_fnyyq")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collision/Boundary2"]
+position = Vector2(2005, 772.5)
+shape = SubResource("RectangleShape2D_fnyyq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Collision/Boundary2"]
+position = Vector2(3462, 399)
+shape = SubResource("RectangleShape2D_vdu41")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Collision/Boundary2"]
+position = Vector2(2727.5, -331)
+shape = SubResource("RectangleShape2D_7mwd8")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Collision/Boundary2"]
+position = Vector2(2727.5, 1146)
+shape = SubResource("RectangleShape2D_7mwd8")
+
+[node name="Obstacle" type="StaticBody2D" parent="Collision"]
+position = Vector2(768, 85)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision/Obstacle"]
+position = Vector2(4.5, 29.5)
+shape = SubResource("RectangleShape2D_4vodh")
+debug_color = Color(0.870588, 0.34902, 0, 0.643137)
+
+[node name="Gameplay" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Player" parent="Gameplay" instance=ExtResource("2_7xbtt")]
+position = Vector2(-470, 144)
+
+[node name="Camera" type="Camera2D" parent="Gameplay/Player"]
+limit_left = -750
+limit_top = -514
+limit_right = 3700
+limit_bottom = 600
+position_smoothing_enabled = true
+
+[node name="Area2D" type="Area2D" parent="Gameplay/Player/Camera"]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Player/Camera/Area2D"]
+shape = SubResource("CircleShape2D_bkbgi")
+debug_color = Color(0.921569, 0, 0.686275, 0.419608)
+
+[node name="Rock_Purple" parent="Gameplay" instance=ExtResource("7_s2x2f")]
+position = Vector2(-544, -67)
+
+[node name="Rock_Purple2" parent="Gameplay" instance=ExtResource("7_s2x2f")]
+position = Vector2(527, 547)
+
+[node name="Rock_Tall" parent="Gameplay" instance=ExtResource("8_bsouo")]
+position = Vector2(1629, 325)
+
+[node name="Rock_Tall2" parent="Gameplay" instance=ExtResource("8_bsouo")]
+position = Vector2(3268, -163)
+
+[node name="Yarn" parent="Gameplay" instance=ExtResource("9_btuvg")]
+position = Vector2(2391, 215)
+
+[node name="Yarn2" parent="Gameplay" instance=ExtResource("9_btuvg")]
+position = Vector2(2718, 652)
+
+[node name="Yarn3" parent="Gameplay" instance=ExtResource("9_btuvg")]
+position = Vector2(3071, 248)
+
+[node name="CameraBounds" type="Area2D" parent="Gameplay"]
+position = Vector2(2088, 482)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("10_e0xmd")
+x_min = -750
+x_max = 3500
+y_min = -700
+y_max = 1200
+zoom = 0.75
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/CameraBounds"]
+position = Vector2(-385, -403)
+shape = SubResource("RectangleShape2D_l6ye0")
+
+[node name="CameraBounds2" type="Area2D" parent="Gameplay"]
+position = Vector2(742, 57)
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("10_e0xmd")
+x_min = -750
+x_max = 3700
+y_min = -514
+y_max = 600
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/CameraBounds2"]
+position = Vector2(1, 24)
+shape = SubResource("RectangleShape2D_l6ye0")
+
+[node name="Castle" parent="Gameplay" instance=ExtResource("11_vkq7s")]
+unique_name_in_owner = true
+modulate = Color(0.513726, 0.513726, 0.513726, 1)
+position = Vector2(2695, -4)
+
+[node name="Title4" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2575.5, 159)
+texture = ExtResource("12_oqxuq")
+region_enabled = true
+region_rect = Rect2(836, 667, 111, 95)
+
+[node name="Title6" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2702.5, 159)
+texture = ExtResource("12_oqxuq")
+region_enabled = true
+region_rect = Rect2(971.177, 625.687, 123.563, 110.524)
+
+[node name="Title5" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2840.5, 165)
+texture = ExtResource("12_oqxuq")
+region_enabled = true
+region_rect = Rect2(877, 765, 153, 119)
+
+[node name="Tutorial_01" type="Node2D" parent="."]
+script = ExtResource("14_cqvlr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tutorial_01"]
+root_node = NodePath("../..")
+autoplay = "bob"
+libraries = {
+"": SubResource("AnimationLibrary_ng20c")
+}
+
+[node name="Appear" type="AnimationPlayer" parent="Tutorial_01"]
+autoplay = "hidden"
+libraries = {
+"": SubResource("AnimationLibrary_4yr2g")
+}
+
+[node name="Tutorial" type="Node2D" parent="Tutorial_01"]
+
+[node name="Label3" type="Label" parent="Tutorial_01/Tutorial"]
+offset_left = 658.0
+offset_top = -241.0
+offset_right = 957.0
+offset_bottom = -101.0
+scale = Vector2(1, 0.9156)
+text = "Jump
+Hold to Glide"
+label_settings = SubResource("LabelSettings_022ok")
+horizontal_alignment = 1
+
+[node name="Title" type="Sprite2D" parent="Tutorial_01/Tutorial"]
+z_index = -1
+position = Vector2(694.5, -295)
+texture = ExtResource("12_oqxuq")
+region_enabled = true
+region_rect = Rect2(423, 666, 265, 123)
+
+[node name="Title2" type="Sprite2D" parent="Tutorial_01/Tutorial"]
+z_index = -1
+position = Vector2(885.5, -291)
+texture = ExtResource("12_oqxuq")
+region_enabled = true
+region_rect = Rect2(705, 667, 128, 113)
+
+[node name="Title3" type="Sprite2D" parent="Tutorial_01/Tutorial"]
+z_index = -1
+position = Vector2(1022.5, -297)
+texture = ExtResource("12_oqxuq")
+region_enabled = true
+region_rect = Rect2(714, 779, 126, 126)
+
+[node name="Area2D" type="Area2D" parent="Tutorial_01"]
+position = Vector2(757, 99)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial_01/Area2D"]
+position = Vector2(-13, 13.5)
+shape = SubResource("RectangleShape2D_fl1ro")

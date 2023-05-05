@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjx8hwm4xsoyy"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://environment.png" id="1_41e3v"]
+[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://assets/environment.png" id="1_41e3v"]
 [ext_resource type="Script" path="res://objects/environment/visibility_trigger.gd" id="2_8sb8x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xqi3"]

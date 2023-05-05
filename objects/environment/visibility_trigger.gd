@@ -13,6 +13,7 @@ func show_deco() -> void:
 
 
 func hide_deco() -> void:
+	print(get_overlapping_bodies().size())
 	if get_overlapping_bodies().size() < 1:
 		set_alpha(1.0)
 

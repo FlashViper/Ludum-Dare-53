@@ -2,7 +2,7 @@ extends VBoxContainer
 
 signal item_pressed(name: String)
 
-var tween : Tween
+#var tween : Tween
 var items : Array[Control] = []
 var current_item := -1
 
@@ -14,8 +14,8 @@ func _ready() -> void:
 			c.gui_input.connect(on_item_input.bind(items.size()))
 			items.append(c)
 	
-	tween = create_tween()
-	tween.stop()
+#	tween = create_tween()
+#	tween.stop()
 
 
 func on_item_input(event: InputEvent, index: int) -> void:
@@ -30,7 +30,7 @@ func press(index: int) -> void:
 
 func highlight(item: int) -> void:
 	current_item = item
-	tween.stop()
+#	tween.stop()
 	
 	for i in items.size():
 		if i == current_item:
@@ -38,17 +38,19 @@ func highlight(item: int) -> void:
 		else:
 			animate_default(items[i])
 	
-	tween.play()
+#	tween.play()
 
 
 
 func animate_default(obj: Control) -> void:
+	var tween := create_tween()
 	tween.tween_property(obj, "modulate", Color.WHITE, 0.45)
 	tween.tween_property(obj, "scale", Vector2.ONE, 0.35)
 	tween.tween_property(obj, "rotation", 0, 0.35)
 
 
 func animate_highlight(obj: Control) -> void:
+	var tween := create_tween()
 	tween.tween_property(obj, "modulate", Color.YELLOW, 0.2)
 	tween.tween_property(obj, "scale", Vector2.ONE * 1.1, 0.1)
 	tween.tween_property(obj, "rotation_degrees", 5, 0.1)

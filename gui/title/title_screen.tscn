@@ -1,60 +1,87 @@
-[gd_scene load_steps=6 format=3 uid="uid://du32u483dflsv"]
+[gd_scene load_steps=9 format=3 uid="uid://du32u483dflsv"]
 
 [ext_resource type="Theme" uid="uid://pkwo8w50eu64" path="res://gui/theme_default.tres" id="1_wmba0"]
 [ext_resource type="Script" path="res://gui/title/title_screen.gd" id="2_5fnih"]
 [ext_resource type="Script" path="res://gui/menu.gd" id="3_bg57p"]
+[ext_resource type="Texture2D" uid="uid://c862h1nwjnh6s" path="res://assets/xd.png" id="3_hps7y"]
+[ext_resource type="Texture2D" uid="uid://blmnxru2ol0wn" path="res://assets/title.png" id="4_cjam2"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_nkih8"]
-font_size = 150
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01w3m"]
+bg_color = Color(0.721569, 0.121569, 0.333333, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ow6x"]
+atlas = ExtResource("4_cjam2")
+region = Rect2(0, 0, 1238.44, 487.923)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bxjl7"]
-font_size = 70
+font_size = 216
+font_color = Color(0.00392157, 0.423529, 0.941176, 1)
+outline_size = 65
+outline_color = Color(0, 0.133333, 0.298039, 1)
 
-[node name="TitleScreen" type="MarginContainer"]
+[node name="TitleScreen" type="PanelContainer"]
+z_index = -2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_wmba0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_01w3m")
 script = ExtResource("2_5fnih")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Node2" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="Node2"]
+z_index = -1
+offset_left = 720.0
+offset_top = 463.0
+offset_right = 1827.0
+offset_bottom = 1087.0
+rotation = -0.120428
+texture = ExtResource("3_hps7y")
+expand_mode = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+z_as_relative = false
+layout_mode = 2
+texture = ExtResource("4_cjam2")
+region_rect = Rect2(168.674, 915.854, 153.261, 149.438)
+patch_margin_left = 34
+patch_margin_top = 37
+patch_margin_right = 34
+patch_margin_bottom = 33
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+z_as_relative = false
 layout_mode = 2
 
-[node name="Logo (temp)" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Kittens (R): 
-Tactical Warfare"
-label_settings = SubResource("LabelSettings_nkih8")
-autowrap_mode = 3
-
-[node name="Menu" type="VBoxContainer" parent="VBoxContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+
+[node name="Logo (temp)" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_7ow6x")
+stretch_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
 script = ExtResource("3_bg57p")
 
-[node name="Play" type="Label" parent="VBoxContainer/Menu"]
+[node name="Play" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/Menu"]
 layout_mode = 2
 mouse_filter = 0
 text = "Play"
 label_settings = SubResource("LabelSettings_bxjl7")
+vertical_alignment = 1
 
-[node name="Options" type="Label" parent="VBoxContainer/Menu"]
-layout_mode = 2
-mouse_filter = 0
-text = "Options"
-label_settings = SubResource("LabelSettings_bxjl7")
-
-[node name="About" type="Label" parent="VBoxContainer/Menu"]
-layout_mode = 2
-mouse_filter = 0
-text = "About"
-label_settings = SubResource("LabelSettings_bxjl7")
-
-[node name="Quit" type="Label" parent="VBoxContainer/Menu"]
-layout_mode = 2
-mouse_filter = 0
-text = "Quit"
-label_settings = SubResource("LabelSettings_bxjl7")
+[node name="Node" type="Node" parent="."]

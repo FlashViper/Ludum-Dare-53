@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dewjc7h3afqil"]
+
+[ext_resource type="PackedScene" uid="uid://blx4jn43npxp8" path="res://assets/effects/combo.tscn" id="1_whvkx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ha6v"]
+font_size = 24
+font_color = Color(0.576471, 0, 1, 1)
+outline_color = Color(1, 0, 0.482353, 1)
+
+[node name="Combo" instance=ExtResource("1_whvkx")]
+score_template = "+%s Seconds"
+
+[node name="Text" parent="." index="0"]
+offset = Vector2(3.16667, -43.4274)
+region_rect = Rect2(1317, 185, 330, 225)
+
+[node name="ComboText" parent="Text" index="0"]
+modulate = Color(1, 1, 1, 1)
+
+[node name="ScoreText" parent="Text/ComboText" index="0"]
+label_settings = SubResource("LabelSettings_7ha6v")
+
+[node name="HitParticles" parent="." index="3"]
+color = Color(0.720833, 0.33, 1, 1)

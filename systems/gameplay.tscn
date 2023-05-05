@@ -1,32 +1,153 @@
-[gd_scene load_steps=10 format=3 uid="uid://c586rhkpw2ndw"]
+[gd_scene load_steps=20 format=3 uid="uid://c586rhkpw2ndw"]
 
 [ext_resource type="Script" path="res://systems/gameplay.gd" id="1_rxybu"]
-[ext_resource type="PackedScene" uid="uid://dwihajjyom1pj" path="res://objects/castle.tscn" id="2_lg5wy"]
-[ext_resource type="PackedScene" uid="uid://c0kgqsdnhrnyi" path="res://objects/environment.tscn" id="2_vq636"]
+[ext_resource type="PackedScene" uid="uid://blx4jn43npxp8" path="res://assets/effects/combo.tscn" id="2_hfioj"]
+[ext_resource type="PackedScene" uid="uid://ciyuyhgj2lx8v" path="res://objects/castle.tscn" id="2_lg5wy"]
+[ext_resource type="PackedScene" uid="uid://dlduuapfarn7w" path="res://objects/environment.tscn" id="2_vq636"]
+[ext_resource type="PackedScene" uid="uid://dewjc7h3afqil" path="res://assets/effects/combo_time.tscn" id="3_gr81n"]
 [ext_resource type="PackedScene" uid="uid://bq35offvda3hv" path="res://player/player.tscn" id="4_xoiy0"]
 [ext_resource type="Script" path="res://systems/camera/camera_rig.gd" id="5_ynp1e"]
 [ext_resource type="Script" path="res://systems/yarn_spawner.gd" id="6_e3khf"]
 [ext_resource type="PackedScene" uid="uid://dlnkg0a2q3mq2" path="res://objects/yarn.tscn" id="7_0deay"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_fcb8d"]
-font_size = 64
+[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://assets/environment.png" id="8_fjde2"]
+[ext_resource type="PackedScene" uid="uid://bw6m2oolow3l3" path="res://gui/win_panel.tscn" id="11_4wfsw"]
+[ext_resource type="Script" path="res://objects/environment/visibility_trigger.gd" id="11_85l7c"]
+[ext_resource type="Script" path="res://misc/hide_on_debug_pause.gd" id="12_qrqqj"]
+[ext_resource type="AudioStream" uid="uid://bfqjnhy2pj5bn" path="res://assets/audio/bump.wav" id="12_x34fq"]
 
 [sub_resource type="Curve" id="Curve_4vuh2"]
 _data = [Vector2(0, 0), 0.0, 2.96396, 0, 0, Vector2(1, 1), 0.0567083, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3dnb"]
+size = Vector2(302, 318)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yl1n"]
+size = Vector2(652, 843)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofll7"]
+font_size = 72
+font_color = Color(0.85, 0.702667, 0.68, 1)
+outline_size = 24
+outline_color = Color(0, 0.133333, 0.298039, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fcb8d"]
+font_size = 64
+
 [node name="Gameplay" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_rxybu")
+time_per_combo = 6.0
+combo_bonus_time = 20.0
+combo_score_scene = ExtResource("2_hfioj")
+combo_time_scene = ExtResource("3_gr81n")
 
 [node name="Environment" parent="." instance=ExtResource("2_vq636")]
+modulate = Color(0.545098, 0.545098, 0.545098, 1)
+position = Vector2(25, 37)
 
 [node name="Castle" parent="." instance=ExtResource("2_lg5wy")]
 
 [node name="Player" parent="." instance=ExtResource("4_xoiy0")]
 motion_mode = 1
 platform_on_leave = 2
-layers_air = 16
+
+[node name="YarnSpawner" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("6_e3khf")
+scene = ExtResource("7_0deay")
+radius_inner = 900
+radius_outer = 2900
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("5_ynp1e")
+max_offset = Vector2(150, 50)
+trauma_curve = SubResource("Curve_4vuh2")
+min_zoom = 1.1
+max_zoom = 0.75
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera"]
+current = true
+
+[node name="Seecret (shhhhh!!!)" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Castle" type="Sprite2D" parent="Seecret (shhhhh!!!)"]
+modulate = Color(1, 0.462745, 0.866667, 1)
+position = Vector2(6493, 553)
+texture = ExtResource("8_fjde2")
+region_enabled = true
+region_rect = Rect2(626.625, 473.625, 737.614, 1054.88)
+
+[node name="EndGame" type="Area2D" parent="Seecret (shhhhh!!!)/Castle"]
+unique_name_in_owner = true
+position = Vector2(-4, 28)
+collision_layer = 24
+collision_mask = 24
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Seecret (shhhhh!!!)/Castle/EndGame"]
+position = Vector2(5, 341)
+shape = SubResource("RectangleShape2D_v3dnb")
+
+[node name="InvisibilityTrigger" type="Area2D" parent="Seecret (shhhhh!!!)/Castle" node_paths=PackedStringArray("target")]
+position = Vector2(0, 372)
+collision_layer = 8
+collision_mask = 10
+script = ExtResource("11_85l7c")
+target = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Seecret (shhhhh!!!)/Castle/InvisibilityTrigger"]
+position = Vector2(13, -431.5)
+shape = SubResource("RectangleShape2D_8yl1n")
+
+[node name="Label" type="Label" parent="Seecret (shhhhh!!!)"]
+offset_left = 4746.0
+offset_top = 1165.0
+offset_right = 5842.0
+offset_bottom = 1585.0
+scale = Vector2(1, 0.9001)
+text = "You made it through the secret mountain pass of Ulric Duun!"
+label_settings = SubResource("LabelSettings_ofll7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Seecret (shhhhh!!!)"]
+offset_left = 5956.0
+offset_top = 1144.0
+offset_right = 7052.0
+offset_bottom = 1564.0
+scale = Vector2(1, 0.9001)
+text = "Do you choose to reject the yarn which you have so desparately chased for so very long?"
+label_settings = SubResource("LabelSettings_ofll7")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Environment" type="Sprite2D" parent="Seecret (shhhhh!!!)"]
+position = Vector2(5324, 1745)
+texture = ExtResource("8_fjde2")
+region_enabled = true
+region_rect = Rect2(1052.64, 70.0756, 458.861, 300.526)
+
+[node name="Environment2" type="Sprite2D" parent="Seecret (shhhhh!!!)"]
+position = Vector2(3888, 1022)
+rotation = -0.523598
+texture = ExtResource("8_fjde2")
+region_enabled = true
+region_rect = Rect2(1052.64, 70.0756, 458.861, 300.526)
+
+[node name="Environment3" type="Sprite2D" parent="Seecret (shhhhh!!!)"]
+position = Vector2(4080, 1688)
+texture = ExtResource("8_fjde2")
+region_enabled = true
+region_rect = Rect2(1558.89, 59.5982, 238.356, 186.819)
+
+[node name="Environment4" type="Sprite2D" parent="Seecret (shhhhh!!!)"]
+position = Vector2(4950, 1071)
+texture = ExtResource("8_fjde2")
+region_enabled = true
+region_rect = Rect2(1558.89, 59.5982, 238.356, 186.819)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -46,16 +167,12 @@ label_settings = SubResource("LabelSettings_fcb8d")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="YarnSpawner" type="Node2D" parent="."]
-y_sort_enabled = true
-script = ExtResource("6_e3khf")
-scene = ExtResource("7_0deay")
-radius_inner = 900
-radius_outer = 2900
+[node name="HideOnDebugPause" type="Node" parent="GUI/Score"]
+script = ExtResource("12_qrqqj")
 
-[node name="Camera" type="Camera2D" parent="."]
-script = ExtResource("5_ynp1e")
-max_offset = Vector2(150, 50)
-trauma_curve = SubResource("Curve_4vuh2")
-min_zoom = 1.1
-max_zoom = 0.75
+[node name="WinPanel" parent="GUI" instance=ExtResource("11_4wfsw")]
+unique_name_in_owner = true
+visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_x34fq")

@@ -1,9 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://dwihajjyom1pj"]
+[gd_scene load_steps=22 format=3 uid="uid://ciyuyhgj2lx8v"]
 
 [ext_resource type="Script" path="res://objects/castle.gd" id="1_pl4a4"]
-[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://environment.png" id="2_sr7kt"]
-[ext_resource type="Texture2D" uid="uid://b4jblidc3tb55" path="res://objects/yarn.png" id="3_5my3h"]
+[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://assets/environment.png" id="2_sr7kt"]
+[ext_resource type="Texture2D" uid="uid://difamkxke4mjx" path="res://assets/particles_yarn.tres" id="3_31miv"]
 [ext_resource type="Script" path="res://objects/environment/visibility_trigger.gd" id="3_e67ho"]
+[ext_resource type="AudioStream" uid="uid://drxa60nfrwt5n" path="res://assets/audio/score.wav" id="5_a1m01"]
+[ext_resource type="Script" path="res://addons/random_audio_player/nodes/random_audio_player.gd" id="6_y7ta8"]
+[ext_resource type="AudioStream" uid="uid://bc8h7fs2aeh2l" path="res://assets/audio/meow_01.wav" id="7_5trcp"]
+[ext_resource type="AudioStream" uid="uid://dvjntxfixsc4w" path="res://assets/audio/meow_02.wav" id="8_dkbup"]
+[ext_resource type="AudioStream" uid="uid://fond2tmy48k4" path="res://assets/audio/meow_03.wav" id="9_120iw"]
+[ext_resource type="AudioStream" uid="uid://b4qudn1xicfu3" path="res://assets/audio/meow_04.wav" id="10_l5ok2"]
+[ext_resource type="AudioStream" uid="uid://dp5emmu40t2o" path="res://assets/audio/meow_05.wav" id="11_lp188"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0lunx"]
 atlas = ExtResource("2_sr7kt")
@@ -49,10 +56,6 @@ func score() -> void:
 	stars.restart()
 "
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rvfmt"]
-atlas = ExtResource("3_5my3h")
-region = Rect2(0, 0, 129, 127)
-
 [sub_resource type="Curve" id="Curve_skpy0"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.662791, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.734234), -0.788133, 0.0, 1, 0]
 point_count = 3
@@ -82,15 +85,15 @@ texture = ExtResource("2_sr7kt")
 region_enabled = true
 region_rect = Rect2(629.245, 455.408, 744.664, 1052.8)
 
-[node name="Flegpole" type="Sprite2D" parent="Visual"]
-position = Vector2(-125, -840)
+[node name="Flegpole" type="Sprite2D" parent="Visual/Castle"]
+position = Vector2(-132, -414)
 texture = ExtResource("2_sr7kt")
 offset = Vector2(-1, -177)
 region_enabled = true
 region_rect = Rect2(18.4548, 21.5455, 78.1818, 424.546)
 
-[node name="Fleg" type="AnimatedSprite2D" parent="Visual"]
-position = Vector2(-17, -1134)
+[node name="Fleg" type="AnimatedSprite2D" parent="Visual/Castle"]
+position = Vector2(-24, -708)
 sprite_frames = SubResource("SpriteFrames_j6r8u")
 animation = &"wave"
 autoplay = "wave"
@@ -108,6 +111,7 @@ unique_name_in_owner = true
 script = SubResource("GDScript_qkshw")
 
 [node name="Yarn" type="CPUParticles2D" parent="Visual/ScoreEffects"]
+unique_name_in_owner = true
 z_index = 1
 position = Vector2(0, -34)
 emitting = false
@@ -116,7 +120,7 @@ lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 lifetime_randomness = 0.57
-texture = SubResource("AtlasTexture_rvfmt")
+texture = ExtResource("3_31miv")
 direction = Vector2(0, -1)
 spread = 143.75
 initial_velocity_min = 500.0
@@ -126,7 +130,6 @@ linear_accel_min = -1000.0
 linear_accel_max = -500.0
 angle_max = 720.0
 scale_amount_min = 0.25
-scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_skpy0")
 color_ramp = SubResource("Gradient_cs40a")
 
@@ -164,8 +167,47 @@ debug_color = Color(0.815686, 0, 0.972549, 0.419608)
 collision_layer = 8
 collision_mask = 10
 script = ExtResource("3_e67ho")
-target = NodePath("../Visual")
+target = NodePath("../Visual/Castle")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibilityTrigger"]
 position = Vector2(13, -431.5)
 shape = SubResource("RectangleShape2D_mpdl3")
+
+[node name="Score" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(1.95685, 2.50218)
+stream = ExtResource("5_a1m01")
+bus = &"SFX"
+
+[node name="Meow" type="Node2D" parent="."]
+script = ExtResource("6_y7ta8")
+volume_Db_overwrite = 3.0
+
+[node name="01" type="AudioStreamPlayer2D" parent="Meow"]
+stream = ExtResource("7_5trcp")
+volume_db = 3.0
+attenuation = 0.0
+bus = &"SFX"
+
+[node name="02" type="AudioStreamPlayer2D" parent="Meow"]
+stream = ExtResource("8_dkbup")
+volume_db = 3.0
+attenuation = 0.0
+bus = &"SFX"
+
+[node name="03" type="AudioStreamPlayer2D" parent="Meow"]
+stream = ExtResource("9_120iw")
+volume_db = 3.0
+attenuation = 0.0
+bus = &"SFX"
+
+[node name="04" type="AudioStreamPlayer2D" parent="Meow"]
+stream = ExtResource("10_l5ok2")
+volume_db = 3.0
+attenuation = 0.0
+bus = &"SFX"
+
+[node name="05" type="AudioStreamPlayer2D" parent="Meow"]
+stream = ExtResource("11_lp188")
+volume_db = 3.0
+attenuation = 0.0
+bus = &"SFX"

@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc26exi72eklo"]
+[gd_scene load_steps=5 format=3 uid="uid://cc26exi72eklo"]
 
 [ext_resource type="PackedScene" uid="uid://bq35offvda3hv" path="res://player/player.tscn" id="1_fedjd"]
 [ext_resource type="PackedScene" uid="uid://dlnkg0a2q3mq2" path="res://objects/yarn.tscn" id="2_r7g5w"]
+[ext_resource type="PackedScene" path="res://objects/environment/env_rock_large.tscn" id="3_rb73k"]
+[ext_resource type="PackedScene" uid="uid://bu6q5t08qnecu" path="res://objects/environment/env_rock_purple.tscn" id="4_uc52j"]
 
 [node name="playground" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_fedjd")]
-position = Vector2(884, 517)
+position = Vector2(773, 545)
+default_state = "Launch"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
@@ -25,3 +28,9 @@ position = Vector2(460, 884)
 
 [node name="Yarn5" parent="." instance=ExtResource("2_r7g5w")]
 position = Vector2(1291, 931)
+
+[node name="Rock_Large" parent="." instance=ExtResource("3_rb73k")]
+position = Vector2(1054, 227)
+
+[node name="Rock_Purple" parent="." instance=ExtResource("4_uc52j")]
+position = Vector2(74, 105)

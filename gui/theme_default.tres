@@ -1,7 +1,13 @@
-[gd_resource type="Theme" format=3 uid="uid://pkwo8w50eu64"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://pkwo8w50eu64"]
+
+[ext_resource type="FontFile" uid="uid://c0yvxhgya2sey" path="res://gui/fonts/LuckiestGuy-Regular.ttf" id="1_00ql5"]
+[ext_resource type="StyleBox" uid="uid://dp7jus7baltkm" path="res://assets/stylebox_default.tres" id="1_26vs4"]
 
 [resource]
+Label/font_sizes/font_size = 84
+Label/fonts/font = ExtResource("1_00ql5")
 MarginContainer/constants/margin_bottom = 50
 MarginContainer/constants/margin_left = 50
 MarginContainer/constants/margin_right = 50
 MarginContainer/constants/margin_top = 50
+PanelContainer/styles/panel = ExtResource("1_26vs4")

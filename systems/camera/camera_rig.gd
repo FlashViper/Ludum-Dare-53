@@ -27,10 +27,10 @@ func _process(delta: float) -> void:
 	var center = Vector2.ZERO
 	var sum := 0.0
 	for i in targets.size():
-		center += targets[i].position * weights[i]
+		center += targets[i].global_position * weights[i]
 		sum += weights[i]
 	center /= sum
-	position = lerp(position, center, move_speed)
+	position = lerp(position, center, 0.1)
 	
 #	var r := Rect2(position, Vector2.ONE)
 #	for target in targets:
@@ -56,6 +56,7 @@ func apply_shake() -> void:
 func add_target(t: Node2D, weight := 1.0) -> void:
 	targets.append(t)
 	weights.append(weight)
+
 
 func remove_target(t: Node2D) -> void:
 	var idx := targets.find(t)

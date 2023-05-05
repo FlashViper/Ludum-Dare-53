@@ -14,7 +14,7 @@ const WALK_DIR_CHANGE := 10000
 const GROUND_DECEL := 2100
 const AIR_DECEL := 1000
 
-const LAUNCH_SPEED := 2000
+const LAUNCH_SPEED := 1700
 
 const JUMP_SPEED := 10
 const JUMP_BOOST := 800
@@ -31,9 +31,10 @@ const DIVE_DURATION := 0.15
 const DIVE_COOLDOWN := 0.15
 
 const AUTOTARGET_DIST := 750
-const AUTOTARGET_ANGLE := deg_to_rad(50)
+const AUTOTARGET_ANGLE := deg_to_rad(35)
 
 var body : CharacterBody2D
+var camera_target : Node2D
 var visual : Node2D
 var height : float
 var velocity_z : float

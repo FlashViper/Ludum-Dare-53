@@ -4,6 +4,11 @@ var t_enter_glide : float
 
 
 func _gameplay(delta: float) -> void:
+	for i in player.body.get_slide_collision_count():
+		var c := player.body.get_slide_collision(i)
+		player.velocity = player.velocity.slide(c.get_normal())
+	
+	player.camera_target.position = Vector2()
 	var accel := Player.WALK_ACCEL
 	var speed := Player.WALK_SPEED
 	
@@ -49,7 +54,7 @@ func _gameplay(delta: float) -> void:
 	
 	if InputManager.direction.length() > 0:
 		if player.height < 0.1:
-			player.visual.on_walk()
+			player.visual.on_walk(InputManager.direction)
 	else:
 		player.visual.idle()
 	

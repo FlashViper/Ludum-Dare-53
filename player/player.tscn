@@ -1,21 +1,22 @@
-[gd_scene load_steps=38 format=3 uid="uid://bq35offvda3hv"]
+[gd_scene load_steps=49 format=3 uid="uid://bq35offvda3hv"]
 
 [ext_resource type="Script" path="res://player/player_node.gd" id="1_4h23a"]
 [ext_resource type="Script" path="res://player/states/player_state_machine.gd" id="2_nhcl8"]
 [ext_resource type="Script" path="res://player/states/movement.gd" id="3_gfbnw"]
 [ext_resource type="Script" path="res://player/states/launch.gd" id="3_j5cb2"]
+[ext_resource type="Script" path="res://player/direction_display.gd" id="4_42wcl"]
+[ext_resource type="Texture2D" uid="uid://blmnxru2ol0wn" path="res://assets/title.png" id="4_w84sq"]
 [ext_resource type="Script" path="res://player/states/glide.gd" id="4_yqpy0"]
+[ext_resource type="AudioStream" uid="uid://cvp4f6ofn2ynq" path="res://assets/audio/glide.wav" id="6_diyep"]
 [ext_resource type="Script" path="res://player/states/dive.gd" id="6_w8a6q"]
+[ext_resource type="Script" path="res://misc/hide_on_debug_pause.gd" id="7_epwcl"]
 [ext_resource type="Script" path="res://player/player_visual.gd" id="7_n5v4d"]
 [ext_resource type="Texture2D" uid="uid://dylfvnh5ww8qk" path="res://player/player_spritesheet.png" id="8_b5ex8"]
 [ext_resource type="PackedScene" uid="uid://clxfoe5rmeonm" path="res://objects/shadow.tscn" id="8_q00d1"]
 [ext_resource type="Script" path="res://player/player_scorecounter.gd" id="10_hnk2t"]
 [ext_resource type="Script" path="res://systems/pushing/push_by_velocity.gd" id="10_ob3iv"]
 [ext_resource type="Script" path="res://player/yarn_target.gd" id="11_4sdvx"]
-
-[sub_resource type="Curve" id="Curve_87u1w"]
-_data = [Vector2(0, 0), 0.0, 3.50369, 0, 0, Vector2(0.666667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.608108), -0.191268, 0.0, 0, 0]
-point_count = 3
+[ext_resource type="Texture2D" uid="uid://b4kduxdae4rl" path="res://assets/particles_dust.tres" id="13_44jh3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1vnaq"]
 atlas = ExtResource("8_b5ex8")
@@ -163,6 +164,53 @@ animations = [{
 [sub_resource type="LabelSettings" id="LabelSettings_jqu6u"]
 font_size = 42
 
+[sub_resource type="Animation" id="Animation_wpfj3"]
+resource_name = "Appear"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mto0k"]
+resource_name = "Disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_v52ej"]
+resource_name = "Hidden"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_cr8ig"]
 length = 0.001
 tracks/0/type = "value"
@@ -200,6 +248,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_vae1u"]
@@ -255,6 +315,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_thnik"]
 _data = {
+"Appear": SubResource("Animation_wpfj3"),
+"Disappear": SubResource("Animation_mto0k"),
+"Hidden": SubResource("Animation_v52ej"),
 "RESET": SubResource("Animation_cr8ig"),
 "collect": SubResource("Animation_vae1u")
 }
@@ -264,11 +327,27 @@ _data = [Vector2(0, 0.481982), inf, 0.0, 1, 0, Vector2(0.631206, 1), 0.0, 0.0, 0
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_q5n7c"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.340426, 1), 0.0, 0.0, 0, 0, Vector2(0.652482, 0.472973), -3.76701, -3.76701, 0, 0, Vector2(0.836879, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 1, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.663102, 1), 0.0, 0.0, 0, 0, Vector2(0.740642, 0.495496), -3.76701, -3.76701, 0, 0, Vector2(0.836879, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 1, 0]
 point_count = 5
 
+[sub_resource type="Curve" id="Curve_pm6hl"]
+_data = [Vector2(0, 1), 0.0, -0.253031, 0, 0, Vector2(1, 0.896396), -0.103604, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_s11v4"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.104895, 0.671329, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_87u1w"]
+_data = [Vector2(0, 0), 0.0, 3.50369, 0, 0, Vector2(0.666667, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.608108), -0.191268, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_q6ice"]
+font_size = 38
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvbiy"]
-radius = 54.0093
+radius = 90.0888
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0b237"]
 radius = 37.0135
@@ -276,29 +355,16 @@ radius = 37.0135
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 8
 collision_mask = 17
+collision_priority = 10.0
+safe_margin = 0.001
 script = ExtResource("1_4h23a")
-layers_air = 8
-
-[node name="States" type="Node" parent="."]
-script = ExtResource("2_nhcl8")
-
-[node name="Launch" type="Node" parent="States"]
-script = ExtResource("3_j5cb2")
-launch_modifier = SubResource("Curve_87u1w")
-
-[node name="Glide" type="Node" parent="States"]
-script = ExtResource("4_yqpy0")
-
-[node name="Movement" type="Node" parent="States"]
-script = ExtResource("3_gfbnw")
-
-[node name="Dive" type="Node" parent="States"]
-script = ExtResource("6_w8a6q")
+layers_air = 16
 
 [node name="Visual" type="Node2D" parent="."]
 script = ExtResource("7_n5v4d")
 
 [node name="Shadow" parent="Visual" instance=ExtResource("8_q00d1")]
+z_index = -2
 
 [node name="Body" type="AnimatedSprite2D" parent="Visual"]
 sprite_frames = SubResource("SpriteFrames_niv1s")
@@ -334,11 +400,24 @@ label_settings = SubResource("LabelSettings_jqu6u")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual/Body/Score"]
+[node name="ScoreAnim" type="AnimationPlayer" parent="Visual/Body/Score"]
 root_node = NodePath("../Root")
 libraries = {
 "": SubResource("AnimationLibrary_thnik")
 }
+
+[node name="AppearAnim" type="AnimationPlayer" parent="Visual/Body/Score"]
+root_node = NodePath("../Root")
+autoplay = "Hidden"
+libraries = {
+"": SubResource("AnimationLibrary_thnik")
+}
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Visual/Body"]
+remote_path = NodePath("../../../States/Launch/DirectionDisplay")
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Visual/Body"]
+remote_path = NodePath("../../../States/Glide/TrackPlayer")
 
 [node name="Target" type="Node2D" parent="Visual"]
 script = ExtResource("11_4sdvx")
@@ -346,6 +425,119 @@ draw_radius = 150
 circle_radius = 20
 radius_falloff = SubResource("Curve_l54vl")
 alpha_falloff = SubResource("Curve_q5n7c")
+
+[node name="HideOnDebugPause" type="Node" parent="Visual/Target"]
+script = ExtResource("7_epwcl")
+
+[node name="Particles" type="CPUParticles2D" parent="Visual"]
+visible = false
+z_index = -1
+position = Vector2(-2, 45)
+emitting = false
+amount = 30
+explosiveness = 0.23
+randomness = 0.52
+lifetime_randomness = 0.25
+texture = ExtResource("13_44jh3")
+direction = Vector2(0, -1)
+spread = 9.95
+gravity = Vector2(0, 98)
+initial_velocity_min = 52.63
+initial_velocity_max = 410.53
+angle_max = 720.0
+scale_amount_min = 0.5
+scale_amount_max = 0.75
+scale_amount_curve = SubResource("Curve_pm6hl")
+color = Color(0.85098, 0.509804, 0.458824, 0.243137)
+color_ramp = SubResource("Gradient_s11v4")
+hue_variation_max = 0.07
+
+[node name="States" type="Node" parent="."]
+script = ExtResource("2_nhcl8")
+
+[node name="Launch" type="Node" parent="States"]
+script = ExtResource("3_j5cb2")
+launch_modifier = SubResource("Curve_87u1w")
+
+[node name="DirectionDisplay" type="Node2D" parent="States/Launch"]
+z_index = 4
+script = ExtResource("4_42wcl")
+
+[node name="Tutorial" type="Node2D" parent="States/Launch/DirectionDisplay"]
+visible = false
+position = Vector2(145, -258)
+metadata/_edit_group_ = true
+
+[node name="Title" type="Sprite2D" parent="States/Launch/DirectionDisplay/Tutorial"]
+z_index = -1
+position = Vector2(-244.5, -75)
+texture = ExtResource("4_w84sq")
+region_enabled = true
+region_rect = Rect2(423, 666, 265, 123)
+
+[node name="Title2" type="Sprite2D" parent="States/Launch/DirectionDisplay/Tutorial"]
+z_index = -1
+position = Vector2(-53.5, -71)
+texture = ExtResource("4_w84sq")
+region_enabled = true
+region_rect = Rect2(705, 667, 128, 113)
+
+[node name="Title3" type="Sprite2D" parent="States/Launch/DirectionDisplay/Tutorial"]
+z_index = -1
+position = Vector2(83.5, -77)
+texture = ExtResource("4_w84sq")
+region_enabled = true
+region_rect = Rect2(714, 779, 126, 126)
+
+[node name="Label" type="Label" parent="States/Launch/DirectionDisplay/Tutorial"]
+offset_left = -323.0
+offset_top = -30.8256
+offset_right = 90.0
+offset_bottom = 81.1744
+text = "Hold to charge 
+Release to launch"
+label_settings = SubResource("LabelSettings_q6ice")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pivot" type="Node2D" parent="States/Launch/DirectionDisplay"]
+position = Vector2(140, 0)
+scale = Vector2(1, 1.23031)
+
+[node name="Base" type="Sprite2D" parent="States/Launch/DirectionDisplay/Pivot"]
+unique_name_in_owner = true
+texture = ExtResource("4_w84sq")
+region_enabled = true
+region_rect = Rect2(1777.8, 402.178, 84.0049, 87.0517)
+
+[node name="Arrow" type="Node2D" parent="States/Launch/DirectionDisplay/Pivot"]
+unique_name_in_owner = true
+
+[node name="Sprite2D" type="Sprite2D" parent="States/Launch/DirectionDisplay/Pivot/Arrow"]
+unique_name_in_owner = true
+position = Vector2(23, 0)
+texture = ExtResource("4_w84sq")
+region_enabled = true
+region_rect = Rect2(1781.22, 513.124, 75.6479, 70.6207)
+
+[node name="HideOnDebugPause" type="Node" parent="States/Launch/DirectionDisplay"]
+script = ExtResource("7_epwcl")
+
+[node name="Glide" type="Node" parent="States"]
+script = ExtResource("4_yqpy0")
+
+[node name="TrackPlayer" type="Node2D" parent="States/Glide"]
+
+[node name="Glide" type="AudioStreamPlayer2D" parent="States/Glide/TrackPlayer"]
+stream = ExtResource("6_diyep")
+volume_db = -13.0029
+attenuation = 0.0
+
+[node name="Movement" type="Node" parent="States"]
+script = ExtResource("3_gfbnw")
+
+[node name="Dive" type="Node" parent="States"]
+script = ExtResource("6_w8a6q")
 
 [node name="DribbleBox" type="Area2D" parent="." node_paths=PackedStringArray("body")]
 position = Vector2(1, 1)
@@ -362,3 +554,5 @@ shape = SubResource("CircleShape2D_vvbiy")
 position = Vector2(-2, 15)
 shape = SubResource("CircleShape2D_0b237")
 debug_color = Color(0.780392, 0.427451, 0, 0.811765)
+
+[node name="CameraTarget" type="Marker2D" parent="."]

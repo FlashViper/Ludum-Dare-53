@@ -1,10 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://c45ji1ng7nuqy"]
+[gd_scene load_steps=10 format=3 uid="uid://c45ji1ng7nuqy"]
 
 [ext_resource type="Script" path="res://gui/main.gd" id="1_0407y"]
 [ext_resource type="PackedScene" uid="uid://du32u483dflsv" path="res://gui/title/title_screen.tscn" id="2_hnxo1"]
 [ext_resource type="PackedScene" uid="uid://c586rhkpw2ndw" path="res://systems/gameplay.tscn" id="3_ng1sb"]
+[ext_resource type="PackedScene" uid="uid://dsmmlfml4mfpq" path="res://tutorial.tscn" id="3_p821w"]
+[ext_resource type="AudioStream" uid="uid://bbnhgn4bl0n8g" path="res://assets/music/Banjo Loop 1 (16 seconds).mp3" id="5_lg6qx"]
+[ext_resource type="PackedScene" uid="uid://cbqv5pfc4g2rx" path="res://secret_ending.tscn" id="5_wobh2"]
+[ext_resource type="Script" path="res://systems/music_manager.gd" id="5_ylhu0"]
+[ext_resource type="AudioStream" uid="uid://domosqpnmjgux" path="res://assets/music/Cube Capture Theme - Slow v01.mp3" id="6_j8lpk"]
+[ext_resource type="AudioStream" uid="uid://bt7jbtwqtxhyc" path="res://assets/music/Cube Capture Theme - Ensemble v01.mp3" id="7_vds60"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0407y")
 title_scene = ExtResource("2_hnxo1")
+tutorial_scene = ExtResource("3_p821w")
 gameplay_scene = ExtResource("3_ng1sb")
+secret_ending = ExtResource("5_wobh2")
+
+[node name="MusicManager" type="Node" parent="."]
+script = ExtResource("5_ylhu0")
+
+[node name="Title" type="AudioStreamPlayer2D" parent="MusicManager"]
+stream = ExtResource("5_lg6qx")
+max_distance = 100000.0
+attenuation = 0.0
+bus = &"Music"
+
+[node name="Tutorial" type="AudioStreamPlayer2D" parent="MusicManager"]
+stream = ExtResource("6_j8lpk")
+max_distance = 100000.0
+attenuation = 0.0
+
+[node name="Gameplay" type="AudioStreamPlayer2D" parent="MusicManager"]
+stream = ExtResource("7_vds60")
+max_distance = 100000.0
+attenuation = 0.0

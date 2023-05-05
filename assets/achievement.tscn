@@ -1,0 +1,301 @@
+[gd_scene load_steps=16 format=3 uid="uid://chbwrb4lcstpd"]
+
+[ext_resource type="Theme" uid="uid://pkwo8w50eu64" path="res://gui/theme_default.tres" id="1_vdbg0"]
+[ext_resource type="Texture2D" uid="uid://difamkxke4mjx" path="res://assets/particles_yarn.tres" id="2_53rrl"]
+[ext_resource type="Texture2D" uid="uid://b4jblidc3tb55" path="res://objects/yarn.png" id="2_43630"]
+[ext_resource type="Texture2D" uid="uid://q783c88jnfid" path="res://assets/environment.png" id="3_31li7"]
+[ext_resource type="AudioStream" uid="uid://du35q1og38r3n" path="res://assets/audio/time_up.wav" id="3_dspwd"]
+[ext_resource type="AudioStream" uid="uid://bc8h7fs2aeh2l" path="res://assets/audio/meow_01.wav" id="6_fl6fn"]
+
+[sub_resource type="Curve" id="Curve_fi7j8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.662791, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.734234), -0.788133, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_cx62h"]
+offsets = PackedFloat32Array(0, 0.860825, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ry31l"]
+atlas = ExtResource("3_31li7")
+region = Rect2(7, 1671, 223, 220)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttdlm"]
+atlas = ExtResource("2_43630")
+region = Rect2(-5, -5, 133, 134)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hcyjd"]
+font_size = 68
+
+[sub_resource type="LabelSettings" id="LabelSettings_tmtu8"]
+font_size = 42
+font_color = Color(1, 1, 1, 0.407843)
+
+[sub_resource type="Animation" id="Animation_qtbng"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_w2sq1"]
+resource_name = "appear"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.8868, 1.1514), Vector2(1.09, 0.85), Vector2(0.95, 1.05), Vector2(1.025, 0.975), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 6, 6.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_dspwd")
+}],
+"times": PackedFloat32Array(0.95094)
+}
+tracks/4/use_blend = true
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CenterContainer/Control/Yarn")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CenterContainer/Control/Stars")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/7/type = "audio"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioStreamPlayer2D2")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_fl6fn")
+}],
+"times": PackedFloat32Array(2)
+}
+tracks/7/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_luupn"]
+_data = {
+"RESET": SubResource("Animation_qtbng"),
+"appear": SubResource("Animation_w2sq1")
+}
+
+[node name="Achievement" type="PanelContainer"]
+offset_right = 942.0
+offset_bottom = 388.0
+pivot_offset = Vector2(396, 131)
+mouse_filter = 2
+theme = ExtResource("1_vdbg0")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Yarn" type="CPUParticles2D" parent="CenterContainer/Control"]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(0, -34)
+scale = Vector2(1, 1)
+emitting = false
+amount = 40
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.57
+texture = ExtResource("2_53rrl")
+direction = Vector2(0, -1)
+spread = 143.75
+initial_velocity_min = 500.0
+initial_velocity_max = 2500.0
+angular_velocity_max = 100.0
+linear_accel_min = -1000.0
+linear_accel_max = -500.0
+angle_max = 720.0
+scale_amount_min = 0.25
+scale_amount_curve = SubResource("Curve_fi7j8")
+color_ramp = SubResource("Gradient_cx62h")
+
+[node name="Stars" type="CPUParticles2D" parent="CenterContainer/Control"]
+z_index = 1
+position = Vector2(0, -34)
+scale = Vector2(1, 1)
+emitting = false
+amount = 20
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.57
+texture = SubResource("AtlasTexture_ry31l")
+direction = Vector2(0, -1)
+spread = 143.75
+initial_velocity_min = 500.0
+initial_velocity_max = 2500.0
+angular_velocity_max = 100.0
+linear_accel_min = -1000.0
+linear_accel_max = -500.0
+angle_max = 720.0
+scale_amount_min = 0.25
+scale_amount_curve = SubResource("Curve_fi7j8")
+color_ramp = SubResource("Gradient_cx62h")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 27
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+modulate = Color(1, 0, 0.45098, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_ttdlm")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Achievement Unocked: 
+Salvation from Yarndom"
+label_settings = SubResource("LabelSettings_hcyjd")
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reject the yarn-obsessed nature of your past and embrace a life playing the hit game Super Smash Brothers Ultimate"
+label_settings = SubResource("LabelSettings_tmtu8")
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "appear"
+libraries = {
+"": SubResource("AnimationLibrary_luupn")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+attenuation = 0.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+volume_db = 4.0
+attenuation = 0.0
